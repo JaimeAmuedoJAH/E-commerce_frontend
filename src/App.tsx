@@ -3,6 +3,7 @@ import Login from './pages/Login'
 import Registro from './pages/Registro'
 import ProtectedRoute from './components/ProtectedRoute'
 import Categorias from './pages/Categorias'
+import Productos from './pages/Productos'
 
 function App() {
   return (
@@ -13,11 +14,16 @@ function App() {
       <Route path="/" element={
         <ProtectedRoute>
           <div style={{ color: 'white' }}>Home (protegido)</div>
-        </ProtectedRoute>
+        </ProtectedRoute> 
       } />
       <Route path="/categorias" element={
         <ProtectedRoute>
           <Categorias />
+        </ProtectedRoute>
+      } />
+      <Route path="/productos/:categoriaId" element={
+        <ProtectedRoute>
+          <Productos />
         </ProtectedRoute>
       } />
     </Routes>
