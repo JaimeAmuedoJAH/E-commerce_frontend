@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import Registro from './pages/Registro'
 import ProtectedRoute from './components/ProtectedRoute'
+import Categorias from './pages/Categorias'
 
 function App() {
   return (
@@ -12,6 +13,11 @@ function App() {
       <Route path="/" element={
         <ProtectedRoute>
           <div style={{ color: 'white' }}>Home (protegido)</div>
+        </ProtectedRoute>
+      } />
+      <Route path="/categorias" element={
+        <ProtectedRoute>
+          <Categorias />
         </ProtectedRoute>
       } />
     </Routes>
