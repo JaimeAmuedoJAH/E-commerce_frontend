@@ -33,7 +33,7 @@ const Login = () => {
         password,
       })
       login(data.token, data.usuario)
-      navigate('/')
+      navigate('/categorias')
     } catch (err: any) {
       if (err.response?.status === 401 || err.response?.status === 400) {
         setError('Email o contraseña incorrectos')
