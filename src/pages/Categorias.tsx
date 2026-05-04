@@ -8,6 +8,9 @@ const Categorias = () => {
     const [categorias, setCategorias] = useState<Categoria[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
+    const [busqueda, setBusqueda] = useState('')
+    const categoriasFiltradas = categorias.filter(c => 
+      c.nombre.toLowerCase().includes(busqueda.toLowerCase()))
 
 
     useEffect(() => {
@@ -22,6 +25,22 @@ const Categorias = () => {
       <h1 style={{ color: '#f0f0f0', fontSize: '22px', fontWeight: 500, marginBottom: '1.5rem' }}>
         Categorías
       </h1>
+
+      <input
+        type="text"
+        placeholder="Buscar categoría..."
+        value={busqueda}
+        onChange={e => setBusqueda(e.target.value)}
+        style={{
+          background: '#1a1d27', border: '0.5px solid #2e3244',
+          borderRadius: '8px', padding: '9px 14px',
+          fontSize: '13px', color: '#f0f0f0', outline: 'none',
+          width: '100%', maxWidth: '320px',
+          marginBottom: '1.5rem', boxSizing: 'border-box' as const,
+        }}
+        onFocus={e => e.target.style.borderColor = '#1d9e75'}
+        onBlur={e => e.target.style.borderColor = '#2e3244'}
+      />
 
       {loading && (
         <p style={{ color: '#6b7280', fontSize: '14px' }}>Cargando...</p>
@@ -42,7 +61,7 @@ const Categorias = () => {
         gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
         gap: '1rem',
       }}>
-        {categorias.map(categoria => (
+        {categoriasFiltradas.map(categoria => (
           <div
             key={categoria.id}
             onClick={() => navigate(`/productos/${categoria.id}`)}
