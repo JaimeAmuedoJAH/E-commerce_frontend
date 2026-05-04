@@ -4,6 +4,7 @@ import Registro from './pages/Registro'
 import ProtectedRoute from './components/ProtectedRoute'
 import Categorias from './pages/Categorias'
 import Productos from './pages/Productos'
+import ProductoDetalle from './pages/ProductoDetalle'
 
 function App() {
   return (
@@ -24,6 +25,11 @@ function App() {
       <Route path="/productos/:categoriaId" element={
         <ProtectedRoute>
           <Productos />
+        </ProtectedRoute>
+      } />
+      <Route path="/producto/:productoId" element={
+        <ProtectedRoute>
+          <ProductoDetalle />
         </ProtectedRoute>
       } />
     </Routes>
