@@ -5,12 +5,18 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Categorias from './pages/Categorias'
 import Productos from './pages/Productos'
 import ProductoDetalle from './pages/ProductoDetalle'
+import Carrito from './pages/Carrito'
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/registro" element={<Registro />} />
+      <Route path="/carrito" element={
+        <ProtectedRoute>
+          <Carrito />
+        </ProtectedRoute>
+      } />
 
       <Route path="/" element={
         <ProtectedRoute>
