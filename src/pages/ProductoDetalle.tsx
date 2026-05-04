@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
+import { useCarrito } from "../context/CarritoContext"
 import api from "../api/axiosConfig"
 import type { Producto } from "../types"
 
@@ -9,6 +10,15 @@ const ProductoDetalle = () => {
     const [producto, setProducto] = useState<Producto | null>(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
+    const { añadirProducto } = useCarrito()
+    const [ agregado, setAgregado ] = useState(false)
+
+    const handleAñadir = async () => {
+        if (!producto) return
+        await añadirProducto(producto.id, 1)
+        setAgregado(true)
+        setTimeout(() => setAgregado(false), 2000)
+    }
 
     useEffect(() => {
         if (!productoId) {
@@ -120,16 +130,18 @@ const ProductoDetalle = () => {
             </div>
 
             <button
+              onClick={handleAñadir}
               disabled={producto.stock === 0}
               style={{
-                background: producto.stock > 0 ? '#1d9e75' : '#2e3244',
+                background: agregado ? '#0f6e56' : producto.stock > 0 ? '#1d9e75' : '#2e3244',
                 color: '#fff', border: 'none', borderRadius: '8px',
                 padding: '12px 2rem', fontSize: '14px', fontWeight: 500,
                 cursor: producto.stock > 0 ? 'pointer' : 'not-allowed',
                 opacity: producto.stock === 0 ? 0.5 : 1,
+                transition: 'background 0.2s',
               }}
             >
-              Añadir al carrito
+              {agregado ? '✓ Añadido' : 'Añadir al carrito'}
             </button>
           </div>
         </div>
