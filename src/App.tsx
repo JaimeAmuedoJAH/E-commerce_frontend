@@ -6,12 +6,15 @@ import Categorias from './pages/Categorias'
 import Productos from './pages/Productos'
 import ProductoDetalle from './pages/ProductoDetalle'
 import Carrito from './pages/Carrito'
+import Pago from './pages/Pago'
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      
       <Route path="/registro" element={<Registro />} />
+
       <Route path="/carrito" element={
         <ProtectedRoute>
           <Carrito />
@@ -23,19 +26,28 @@ function App() {
           <div style={{ color: 'white' }}>Home (protegido)</div>
         </ProtectedRoute> 
       } />
+
       <Route path="/categorias" element={
         <ProtectedRoute>
           <Categorias />
         </ProtectedRoute>
       } />
+
       <Route path="/productos/:categoriaId" element={
         <ProtectedRoute>
           <Productos />
         </ProtectedRoute>
       } />
+
       <Route path="/producto/:productoId" element={
         <ProtectedRoute>
           <ProductoDetalle />
+        </ProtectedRoute>
+      } />
+
+      <Route path="/pago" element={
+        <ProtectedRoute>
+          <Pago />
         </ProtectedRoute>
       } />
     </Routes>

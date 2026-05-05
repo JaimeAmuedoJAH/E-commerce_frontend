@@ -29,3 +29,30 @@ export interface Carrito {
     items: CarritoItem[]
     totalItems: number
 }
+
+export interface Tarjeta {
+    id: number
+    clienteId: number
+    numeroTarjeta: string
+    titular: string
+    fechaExpiracion: string
+    saldo: number
+}
+
+export interface PagoRequest {
+    carritoId: number
+    clienteId: number
+    numeroTarjeta: string
+    fechaExpiracion: string
+    cvv: string
+    titular: string
+    monto: number
+}
+
+export interface PagoResponse {
+    exitoso: boolean
+    mensaje: string
+    codigoTransaccion: string | null
+    carritoId: number
+    clienteId: number
+}    

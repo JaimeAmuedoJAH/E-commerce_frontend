@@ -164,7 +164,7 @@ const Carrito = () => {
               </span>
             </div>
             <button
-              onClick={() => navigate('/ordenes/nueva')}
+              onClick={() => navigate('/pago')}
               style={{
                 width: '100%', background: '#1d9e75', color: '#fff',
                 border: 'none', borderRadius: '8px', padding: '11px',
