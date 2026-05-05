@@ -9,59 +9,30 @@ import Carrito from './pages/Carrito'
 import Pago from './pages/Pago'
 import OrdenNueva from './pages/OrdenNueva'
 import OrdenConfirmacion from './pages/OrdenConfirmacion'
+import Navbar from './components/Navbar'
+import Ordenes from './pages/Ordenes'
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-
       <Route path="/registro" element={<Registro />} />
 
-      <Route path="/carrito" element={
+      <Route path="/*" element={
         <ProtectedRoute>
-          <Carrito />
-        </ProtectedRoute>
-      } />
-
-      <Route path="/" element={
-        <ProtectedRoute>
-          <div style={{ color: 'white' }}>Home (protegido)</div>
-        </ProtectedRoute> 
-      } />
-
-      <Route path="/categorias" element={
-        <ProtectedRoute>
-          <Categorias />
-        </ProtectedRoute>
-      } />
-
-      <Route path="/productos/:categoriaId" element={
-        <ProtectedRoute>
-          <Productos />
-        </ProtectedRoute>
-      } />
-
-      <Route path="/producto/:productoId" element={
-        <ProtectedRoute>
-          <ProductoDetalle />
-        </ProtectedRoute>
-      } />
-
-      <Route path="/pago" element={
-        <ProtectedRoute>
-          <Pago />
-        </ProtectedRoute>
-      } />
-
-      <Route path="/ordenes/nueva" element={
-      <ProtectedRoute>
-        <OrdenNueva />
-      </ProtectedRoute>
-    } />
-
-      <Route path="/ordenes/confirmacion" element={
-        <ProtectedRoute>
-          <OrdenConfirmacion />
+          <>
+            <Navbar />
+            <Routes>
+              <Route path="/categorias" element={<Categorias />} />
+              <Route path="/productos/:categoriaId" element={<Productos />} />
+              <Route path="/producto/:productoId" element={<ProductoDetalle />} />
+              <Route path="/carrito" element={<Carrito />} />
+              <Route path="/pago" element={<Pago />} />
+              <Route path="/ordenes/nueva" element={<OrdenNueva />} />
+              <Route path="/ordenes/confirmacion" element={<OrdenConfirmacion />} />
+              <Route path="/ordenes" element={<Ordenes />} />
+            </Routes>
+          </>
         </ProtectedRoute>
       } />
     </Routes>
