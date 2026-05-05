@@ -7,12 +7,14 @@ import Productos from './pages/Productos'
 import ProductoDetalle from './pages/ProductoDetalle'
 import Carrito from './pages/Carrito'
 import Pago from './pages/Pago'
+import OrdenNueva from './pages/OrdenNueva'
+import OrdenConfirmacion from './pages/OrdenConfirmacion'
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-      
+
       <Route path="/registro" element={<Registro />} />
 
       <Route path="/carrito" element={
@@ -48,6 +50,18 @@ function App() {
       <Route path="/pago" element={
         <ProtectedRoute>
           <Pago />
+        </ProtectedRoute>
+      } />
+
+      <Route path="/ordenes/nueva" element={
+      <ProtectedRoute>
+        <OrdenNueva />
+      </ProtectedRoute>
+    } />
+
+      <Route path="/ordenes/confirmacion" element={
+        <ProtectedRoute>
+          <OrdenConfirmacion />
         </ProtectedRoute>
       } />
     </Routes>
