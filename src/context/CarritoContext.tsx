@@ -68,33 +68,48 @@ export const CarritoProvider = ({ children}: { children: ReactNode }) => {
     }
 
     const actualizarCantidad = async (productoId: number, cantidad: number) => {
-    if (!user || !carrito) return
-    const nuevosItems = carrito.items
-      .filter(i => !(i.producto.id === productoId && cantidad === 0))
-      .map(i => ({
-        productoId: i.producto.id,
-        cantidad: i.producto.id === productoId ? cantidad : i.cantidad,
-      }))
+      if (!user || !carrito) return
 
-    const res = await api.put<Carrito>(`/carritos/update/${carrito.id}`, {
-      clienteId: user.id,
-      items: nuevosItems,
-    })
-    setCarrito(res.data)
-  }
+      const nuevosItems = carrito.items
+        .filter(i => !(i.producto.id === productoId && cantidad === 0))
+        .map(i => ({
+          productoId: i.producto.id,
+          cantidad: i.producto.id === productoId ? cantidad : i.cantidad,
+        }))
 
-  const eliminarProducto = async (productoId: number) => {
-    if (!user || !carrito) return
-    const nuevosItems = carrito.items
-      .filter(i => i.producto.id !== productoId)
-      .map(i => ({ productoId: i.producto.id, cantidad: i.cantidad }))
+      if (nuevosItems.length === 0) {
+        await api.delete(`/carritos/delete/${carrito.id}`)
+        setCarrito(null)
+        return
+      }
 
-    const res = await api.put<Carrito>(`/carritos/update/${carrito.id}`, {
-      clienteId: user.id,
-      items: nuevosItems,
-    })
-    setCarrito(res.data)
-  }
+      const res = await api.put<Carrito>(`/carritos/update/${carrito.id}`, {
+        clienteId: user.id,
+        items: nuevosItems,
+      })
+      setCarrito(res.data)
+    }
+
+    const eliminarProducto = async (productoId: number) => {
+      if (!user || !carrito) return
+
+      const nuevosItems = carrito.items
+        .filter(i => i.producto.id !== productoId)
+        .map(i => ({ productoId: i.producto.id, cantidad: i.cantidad }))
+
+      if (nuevosItems.length === 0) {
+        // Si no quedan items eliminamos el carrito entero
+        await api.delete(`/carritos/delete/${carrito.id}`)
+        setCarrito(null)
+        return
+      }
+
+      const res = await api.put<Carrito>(`/carritos/update/${carrito.id}`, {
+        clienteId: user.id,
+        items: nuevosItems,
+      })
+      setCarrito(res.data)
+    }
 
   const vaciarCarrito = () => setCarrito(null)
 

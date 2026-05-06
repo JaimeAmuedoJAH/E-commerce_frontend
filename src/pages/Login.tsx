@@ -33,7 +33,7 @@ const Login = () => {
         password,
       })
       login(data.token, data.usuario)
-      navigate('/categorias')
+      navigate('/')
     } catch (err: any) {
       if (err.response?.status === 401 || err.response?.status === 400) {
         setError('Email o contraseña incorrectos')
@@ -63,25 +63,25 @@ const Login = () => {
         maxWidth: '360px',
       }}>
         {/* Logo */}
-        <div style={{
-          width: '36px', height: '36px',
-          background: '#1d9e75',
-          borderRadius: '8px',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          margin: '0 auto 1.25rem',
-        }}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
-            <path d="M9 10h6M9 14h4"/>
+        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
+            stroke="#1d9e75" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+            style={{ margin: '0 auto 8px', display: 'block' }}>
+            <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.38-1 1.73V7l8 5v1H3v-1l8-5V5.73A2 2 0 0 1 10 4a2 2 0 0 1 2-2z"/>
           </svg>
+          <span style={{ color: '#f0f0f0', fontSize: '18px', fontWeight: 700, letterSpacing: '6px' }}>
+            NOIR
+          </span>
+          <p style={{ color: '#6b7280', fontSize: '11px', letterSpacing: '2px', margin: '4px 0 0' }}>
+            VISTE EL SILENCIO
+          </p>
         </div>
 
         <h1 style={{ color: '#f0f0f0', fontSize: '20px', fontWeight: 500, textAlign: 'center', margin: '0 0 4px' }}>
           Bienvenido
         </h1>
         <p style={{ color: '#6b7280', fontSize: '13px', textAlign: 'center', margin: '0 0 1.5rem' }}>
-          Inicia sesión en tu cuenta
+          Inicio de sesión
         </p>
 
         {error && (

@@ -15,7 +15,7 @@ const Carrito = () => {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
         <button
-          onClick={() => navigate('/categorias')}
+          onClick={() => navigate('/')}
           style={{
             background: 'none', border: '0.5px solid #2e3244',
             borderRadius: '8px', padding: '6px 12px',

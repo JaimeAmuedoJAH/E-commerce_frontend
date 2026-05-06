@@ -9,28 +9,30 @@ import Carrito from './pages/Carrito'
 import Pago from './pages/Pago'
 import OrdenNueva from './pages/OrdenNueva'
 import OrdenConfirmacion from './pages/OrdenConfirmacion'
-import Navbar from './components/Navbar'
 import Ordenes from './pages/Ordenes'
+import Home from './pages/Home'
+import NavBarPublica from './components/NavBarPublica'
 
 function App() {
   return (
     <Routes>
+      <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/registro" element={<Registro />} />
 
       <Route path="/*" element={
         <ProtectedRoute>
           <>
-            <Navbar />
+            <NavBarPublica />
             <Routes>
-              <Route path="/categorias" element={<Categorias />} />
-              <Route path="/productos/:categoriaId" element={<Productos />} />
-              <Route path="/producto/:productoId" element={<ProductoDetalle />} />
-              <Route path="/carrito" element={<Carrito />} />
-              <Route path="/pago" element={<Pago />} />
-              <Route path="/ordenes/nueva" element={<OrdenNueva />} />
-              <Route path="/ordenes/confirmacion" element={<OrdenConfirmacion />} />
-              <Route path="/ordenes" element={<Ordenes />} />
+              <Route path="categorias" element={<Categorias />} />
+              <Route path="productos/:categoriaId" element={<Productos />} />
+              <Route path="producto/:productoId" element={<ProductoDetalle />} />
+              <Route path="carrito" element={<Carrito />} />
+              <Route path="pago" element={<Pago />} />
+              <Route path="ordenes/nueva" element={<OrdenNueva />} />
+              <Route path="ordenes/confirmacion" element={<OrdenConfirmacion />} />
+              <Route path="ordenes" element={<Ordenes />} />
             </Routes>
           </>
         </ProtectedRoute>
