@@ -85,20 +85,23 @@ const Registro = () => {
         width: '100%', maxWidth: '360px',
       }}>
         {/* Logo */}
-        <div style={{
-          width: '36px', height: '36px', background: '#1d9e75',
-          borderRadius: '8px', display: 'flex', alignItems: 'center',
-          justifyContent: 'center', margin: '0 auto 1.25rem',
-        }}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-        </div>
+      <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
+          stroke="#1d9e75" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+          style={{ margin: '0 auto 8px', display: 'block' }}>
+          <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.38-1 1.73V7l8 5v1H3v-1l8-5V5.73A2 2 0 0 1 10 4a2 2 0 0 1 2-2z"/>
+        </svg>
+        <span style={{ color: '#f0f0f0', fontSize: '18px', fontWeight: 700, letterSpacing: '6px' }}>
+          NOIR
+        </span>
+        <p style={{ color: '#6b7280', fontSize: '11px', letterSpacing: '2px', margin: '4px 0 0' }}>
+          VISTE EL SILENCIO
+        </p>
+      </div>
+
 
         <h1 style={{ color: '#f0f0f0', fontSize: '20px', fontWeight: 500, textAlign: 'center', margin: '0 0 4px' }}>
-          Crear cuenta
+          Crea tu cuenta
         </h1>
         <p style={{ color: '#6b7280', fontSize: '13px', textAlign: 'center', margin: '0 0 1.5rem' }}>
           Regístrate para empezar a comprar
