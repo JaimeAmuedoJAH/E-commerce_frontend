@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import api from '../api/axiosConfig'
+import { theme } from '../styles/theme'
 
 interface LoginResponseDTO {
   token: string
@@ -28,10 +29,7 @@ const Login = () => {
     setError(null)
     setLoading(true)
     try {
-      const { data } = await api.post<LoginResponseDTO>('/usuarios/login', {
-        email,
-        password,
-      })
+      const { data } = await api.post<LoginResponseDTO>('/usuarios/login', { email, password })
       login(data.token, data.usuario)
       navigate('/')
     } catch (err: any) {
@@ -45,140 +43,192 @@ const Login = () => {
     }
   }
 
+  const inputStyle = {
+    width: '100%', boxSizing: 'border-box' as const,
+    background: theme.colors.bgInput,
+    border: `1px solid ${theme.colors.border}`,
+    borderRadius: theme.radius.md,
+    padding: '10px 14px',
+    fontSize: '13px', color: theme.colors.textPrimary, outline: 'none',
+    transition: 'border-color 0.2s',
+  }
+
   return (
     <div style={{
-      minHeight: '100vh',
-      width: '100%',
-      background: '#0f1117',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+      minHeight: '100vh', width: '100%',
+      background: theme.colors.bg,
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      position: 'relative', overflow: 'hidden',
     }}>
+
+      {/* Fondo decorativo */}
       <div style={{
-        background: '#1a1d27',
-        border: '0.5px solid #2e3244',
-        borderRadius: '16px',
-        padding: '2rem 2rem',
-        width: '100%',
-        maxWidth: '360px',
+        position: 'absolute', top: '30%', left: '50%',
+        transform: 'translateX(-50%)',
+        width: '500px', height: '500px',
+        background: `radial-gradient(circle, ${theme.colors.accent}06 0%, transparent 70%)`,
+        pointerEvents: 'none',
+      }} />
+
+      <div style={{
+        background: theme.colors.bgCard,
+        border: `1px solid ${theme.colors.border}`,
+        borderRadius: theme.radius.xl,
+        padding: '2.5rem',
+        width: '100%', maxWidth: '380px',
+        boxShadow: theme.shadow.card,
+        position: 'relative',
       }}>
+
         {/* Logo */}
-        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
-            stroke="#1d9e75" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-            style={{ margin: '0 auto 8px', display: 'block' }}>
-            <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.38-1 1.73V7l8 5v1H3v-1l8-5V5.73A2 2 0 0 1 10 4a2 2 0 0 1 2-2z"/>
-          </svg>
-          <span style={{ color: '#f0f0f0', fontSize: '18px', fontWeight: 700, letterSpacing: '6px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <div style={{
+            width: '48px', height: '48px',
+            background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
+            borderRadius: theme.radius.lg,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            margin: '0 auto 12px',
+            boxShadow: theme.shadow.accent,
+          }}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.38-1 1.73V7l8 5v1H3v-1l8-5V5.73A2 2 0 0 1 10 4a2 2 0 0 1 2-2z"/>
+            </svg>
+          </div>
+          <span style={{
+            color: theme.colors.textPrimary, fontSize: '20px',
+            fontWeight: 700, letterSpacing: '6px', display: 'block',
+          }}>
             NOIR
           </span>
-          <p style={{ color: '#6b7280', fontSize: '11px', letterSpacing: '2px', margin: '4px 0 0' }}>
+          <span style={{
+            color: theme.colors.textMuted, fontSize: '10px',
+            letterSpacing: '3px', display: 'block', marginTop: '2px',
+          }}>
             VISTE EL SILENCIO
-          </p>
+          </span>
         </div>
 
-        <h1 style={{ color: '#f0f0f0', fontSize: '20px', fontWeight: 500, textAlign: 'center', margin: '0 0 4px' }}>
-          Bienvenido
+        <h1 style={{
+          color: theme.colors.textPrimary, fontSize: '18px',
+          fontWeight: 600, textAlign: 'center', margin: '0 0 4px',
+        }}>
+          Bienvenido de nuevo
         </h1>
-        <p style={{ color: '#6b7280', fontSize: '13px', textAlign: 'center', margin: '0 0 1.5rem' }}>
-          Inicio de sesión
+        <p style={{
+          color: theme.colors.textSecondary, fontSize: '13px',
+          textAlign: 'center', margin: '0 0 1.75rem',
+        }}>
+          Inicia sesión en tu cuenta
         </p>
 
         {error && (
           <div style={{
-            background: '#2a1a1a', border: '0.5px solid #7f1d1d',
-            borderRadius: '8px', padding: '10px 14px',
-            fontSize: '13px', color: '#f87171', marginBottom: '1rem',
+            background: theme.colors.errorBg,
+            border: `1px solid ${theme.colors.errorBorder}`,
+            borderRadius: theme.radius.md,
+            padding: '10px 14px',
+            fontSize: '13px', color: theme.colors.error,
+            marginBottom: '1.25rem',
+            display: 'flex', alignItems: 'center', gap: '8px',
           }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', fontSize: '12px', color: '#9ca3af', marginBottom: '6px' }}>
+            <label style={{
+              display: 'block', fontSize: '12px',
+              color: theme.colors.textSecondary, marginBottom: '6px', fontWeight: 500,
+            }}>
               Email
             </label>
             <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="juan@example.com"
-              style={{
-                width: '100%', boxSizing: 'border-box',
-                background: '#0f1117', border: '0.5px solid #2e3244',
-                borderRadius: '8px', padding: '9px 12px',
-                fontSize: '13px', color: '#f0f0f0', outline: 'none',
-              }}
-              onFocus={e => e.target.style.borderColor = '#1d9e75'}
-              onBlur={e => e.target.style.borderColor = '#2e3244'}
+              type="email" value={email}
+              onChange={e => setEmail(e.target.value)}
+              required placeholder="juan@example.com"
+              style={inputStyle}
+              onFocus={e => e.target.style.borderColor = theme.colors.borderAccent}
+              onBlur={e => e.target.style.borderColor = theme.colors.border}
             />
           </div>
 
-          <div style={{ marginBottom: '1.25rem' }}>
-            <label style={{ display: 'block', fontSize: '12px', color: '#9ca3af', marginBottom: '6px' }}>
-                Contraseña
+          <div style={{ marginBottom: '1.5rem' }}>
+            <label style={{
+              display: 'block', fontSize: '12px',
+              color: theme.colors.textSecondary, marginBottom: '6px', fontWeight: 500,
+            }}>
+              Contraseña
             </label>
-                <div style={{ position: 'relative' }}>
-                    <input
-                    type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    placeholder="••••••••"
-                    style={{
-                        width: '100%', boxSizing: 'border-box',
-                        background: '#0f1117', border: '0.5px solid #2e3244',
-                        borderRadius: '8px', padding: '9px 36px 9px 12px',
-                        fontSize: '13px', color: '#f0f0f0', outline: 'none',
-                    }}
-                    onFocus={e => e.target.style.borderColor = '#1d9e75'}
-                    onBlur={e => e.target.style.borderColor = '#2e3244'}
-                    />
-                    <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    style={{
-                        position: 'absolute', right: '10px', top: '50%',
-                        transform: 'translateY(-50%)',
-                        background: 'none', border: 'none', cursor: 'pointer',
-                        padding: 0, color: '#6b7280',
-                    }}
-                    >
-                    {showPassword ? (
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
-                        <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
-                        <line x1="1" y1="1" x2="23" y2="23"/>
-                        </svg>
-                    ) : (
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                        <circle cx="12" cy="12" r="3"/>
-                        </svg>
-                    )}
-                    </button>
-                </div>
+            <div style={{ position: 'relative' }}>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                required placeholder="••••••••"
+                style={{ ...inputStyle, paddingRight: '40px' }}
+                onFocus={e => e.target.style.borderColor = theme.colors.borderAccent}
+                onBlur={e => e.target.style.borderColor = theme.colors.border}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: 'absolute', right: '10px', top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'none', border: 'none', cursor: 'pointer',
+                  padding: 0, color: theme.colors.textMuted,
+                }}
+              >
+                {showPassword ? (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                    <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                  </svg>
+                ) : (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                )}
+              </button>
             </div>
+          </div>
 
           <button
-            type="submit"
-            disabled={loading}
+            type="submit" disabled={loading}
             style={{
-              width: '100%', background: '#1d9e75',
-              color: '#fff', border: 'none', borderRadius: '8px',
-              padding: '10px', fontSize: '14px', fontWeight: 500,
-              cursor: 'pointer', opacity: loading ? 0.6 : 1,
+              width: '100%',
+              background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
+              color: '#fff', border: 'none',
+              borderRadius: theme.radius.md,
+              padding: '11px', fontSize: '13px', fontWeight: 600,
+              cursor: 'pointer', letterSpacing: '1px',
+              boxShadow: theme.shadow.accent,
+              opacity: loading ? 0.6 : 1,
+              transition: 'opacity 0.2s',
             }}
           >
-            {loading ? 'Entrando...' : 'Entrar'}
+            {loading ? 'Entrando...' : 'INICIAR SESIÓN'}
           </button>
         </form>
 
-        <p style={{ textAlign: 'center', fontSize: '12px', color: '#6b7280', marginTop: '1rem' }}>
+        <p style={{
+          textAlign: 'center', fontSize: '12px',
+          color: theme.colors.textMuted, marginTop: '1.25rem',
+        }}>
           ¿No tienes cuenta?{' '}
-          <a href="/registro" style={{ color: '#1d9e75', textDecoration: 'none' }}>
+          <a
+            href="/registro"
+            style={{ color: theme.colors.accent, textDecoration: 'none', fontWeight: 500 }}
+          >
             Regístrate
           </a>
         </p>
