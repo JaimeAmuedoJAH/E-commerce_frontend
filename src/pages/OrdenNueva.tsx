@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import api from '../api/axiosConfig'
 import { useAuth } from '../context/AuthContext'
 import { useCarrito } from '../context/CarritoContext'
+import { theme } from '../styles/theme'
 
 interface OrdenResponse {
   id: number
@@ -15,7 +16,7 @@ interface OrdenResponse {
   codigoTransaccion: string
   items: {
     id: number
-    producto: { id: number; nombre: string; precio: number }
+    producto: { id: number; nombre: string; imagen: string }
     cantidad: number
     precioUnitario: number
     subtotal: number
@@ -64,125 +65,186 @@ const OrdenNueva = () => {
     }
   }
 
-  const inputStyle = {
-    width: '100%', boxSizing: 'border-box' as const,
-    background: '#0f1117', border: '0.5px solid #2e3244',
-    borderRadius: '8px', padding: '9px 12px',
-    fontSize: '13px', color: '#f0f0f0', outline: 'none',
-  }
-
   return (
-    <div style={{ minHeight: '100vh', background: '#0f1117', padding: '2rem' }}>
+    <div style={{ minHeight: '100vh', background: theme.colors.bg, padding: '2.5rem' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
 
-      {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-        <button
-          onClick={() => navigate('/pago')}
-          style={{
-            background: 'none', border: '0.5px solid #2e3244',
-            borderRadius: '8px', padding: '6px 12px',
-            color: '#9ca3af', cursor: 'pointer', fontSize: '13px',
-          }}
-        >
-          ← Volver
-        </button>
-        <h1 style={{ color: '#f0f0f0', fontSize: '22px', fontWeight: 500, margin: 0 }}>
-          Confirmar pedido
-        </h1>
-      </div>
-
-      {error && (
-        <div style={{
-          background: '#2a1a1a', border: '0.5px solid #7f1d1d',
-          borderRadius: '8px', padding: '10px 14px',
-          fontSize: '13px', color: '#f87171', marginBottom: '1rem',
-        }}>
-          {error}
-        </div>
-      )}
-
-      <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', alignItems: 'flex-start' }}>
-
-        {/* Formulario dirección */}
-        <div style={{ flex: 1, minWidth: '300px' }}>
-          <div style={{
-            background: '#1a1d27', border: '0.5px solid #2e3244',
-            borderRadius: '12px', padding: '1.5rem', marginBottom: '1rem',
-          }}>
-            <h2 style={{ color: '#f0f0f0', fontSize: '16px', fontWeight: 500, margin: '0 0 1rem' }}>
-              Dirección de envío
-            </h2>
-            <label style={{ display: 'block', fontSize: '12px', color: '#9ca3af', marginBottom: '6px' }}>
-              Dirección completa
-            </label>
-            <textarea
-              value={direccion}
-              onChange={e => setDireccion(e.target.value)}
-              placeholder="Calle, número, piso, ciudad, código postal..."
-              rows={3}
-              style={{ ...inputStyle, resize: 'none' }}
-              onFocus={e => e.target.style.borderColor = '#1d9e75'}
-              onBlur={e => e.target.style.borderColor = '#2e3244'}
-            />
-          </div>
-
-          {/* Pago confirmado */}
-          <div style={{
-            background: '#0f2e24', border: '0.5px solid #1d9e75',
-            borderRadius: '12px', padding: '1rem',
-          }}>
-            <p style={{ color: '#1d9e75', fontSize: '13px', fontWeight: 500, margin: '0 0 4px' }}>
-              ✓ Pago procesado correctamente
+        {/* Header */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
+          <button
+            onClick={() => navigate('/pago')}
+            style={{
+              background: theme.colors.bgCard,
+              border: `1px solid ${theme.colors.border}`,
+              borderRadius: theme.radius.md,
+              padding: '8px 14px',
+              color: theme.colors.textSecondary,
+              cursor: 'pointer', fontSize: '13px',
+              display: 'flex', alignItems: 'center', gap: '6px',
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={e => e.currentTarget.style.borderColor = theme.colors.borderHover}
+            onMouseLeave={e => e.currentTarget.style.borderColor = theme.colors.border}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            Volver
+          </button>
+          <div>
+            <p style={{ color: theme.colors.accent, fontSize: '11px', letterSpacing: '4px', margin: '0 0 2px' }}>
+              CHECKOUT
             </p>
-            <p style={{ color: '#6b7280', fontSize: '12px', margin: 0 }}>
-              Código de transacción: {codigoTransaccion}
-            </p>
+            <h1 style={{ color: theme.colors.textPrimary, fontSize: '24px', fontWeight: 700, margin: 0, letterSpacing: '2px' }}>
+              CONFIRMAR PEDIDO
+            </h1>
           </div>
         </div>
 
-        {/* Resumen */}
-        <div style={{
-          width: '260px', background: '#1a1d27',
-          border: '0.5px solid #2e3244', borderRadius: '12px', padding: '1.5rem',
-        }}>
-          <h2 style={{ color: '#f0f0f0', fontSize: '16px', fontWeight: 500, margin: '0 0 1rem' }}>
-            Resumen
-          </h2>
-          {carrito?.items.map(item => (
-            <div key={item.id} style={{
-              display: 'flex', justifyContent: 'space-between', marginBottom: '8px',
+        {error && (
+          <div style={{
+            background: theme.colors.errorBg,
+            border: `1px solid ${theme.colors.errorBorder}`,
+            borderRadius: theme.radius.md,
+            padding: '12px 16px',
+            fontSize: '13px', color: theme.colors.error,
+            marginBottom: '1.5rem',
+            display: 'flex', alignItems: 'center', gap: '8px',
+          }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            {error}
+          </div>
+        )}
+
+        <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', alignItems: 'flex-start' }}>
+
+          {/* Formulario */}
+          <div style={{ flex: 1, minWidth: '320px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+
+            {/* Pago confirmado */}
+            <div style={{
+              background: theme.colors.accentBg,
+              border: `1px solid ${theme.colors.borderAccent}40`,
+              borderRadius: theme.radius.xl,
+              padding: '1.25rem',
+              display: 'flex', alignItems: 'center', gap: '1rem',
             }}>
-              <span style={{ color: '#6b7280', fontSize: '13px' }}>
-                {item.producto.nombre} x{item.cantidad}
-              </span>
-              <span style={{ color: '#f0f0f0', fontSize: '13px' }}>
-                {(item.producto.precio * item.cantidad).toFixed(2)} €
+              <div style={{
+                width: '36px', height: '36px', flexShrink: 0,
+                background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
+                borderRadius: theme.radius.md,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <div>
+                <p style={{ color: theme.colors.accent, fontSize: '13px', fontWeight: 600, margin: '0 0 2px' }}>
+                  Pago procesado correctamente
+                </p>
+                <p style={{ color: theme.colors.textMuted, fontSize: '11px', margin: 0, fontFamily: 'monospace' }}>
+                  {codigoTransaccion}
+                </p>
+              </div>
+            </div>
+
+            {/* Dirección */}
+            <div style={{
+              background: theme.colors.bgCard,
+              border: `1px solid ${theme.colors.border}`,
+              borderRadius: theme.radius.xl,
+              padding: '1.5rem',
+            }}>
+              <h2 style={{ color: theme.colors.textPrimary, fontSize: '15px', fontWeight: 600, margin: '0 0 1.25rem', letterSpacing: '1px' }}>
+                DIRECCIÓN DE ENVÍO
+              </h2>
+              <label style={{ display: 'block', fontSize: '12px', color: theme.colors.textSecondary, marginBottom: '6px', fontWeight: 500 }}>
+                Dirección completa
+              </label>
+              <textarea
+                value={direccion}
+                onChange={e => setDireccion(e.target.value)}
+                placeholder="Calle, número, piso, ciudad, código postal..."
+                rows={3}
+                style={{
+                  width: '100%', boxSizing: 'border-box' as const,
+                  background: theme.colors.bgInput,
+                  border: `1px solid ${theme.colors.border}`,
+                  borderRadius: theme.radius.md,
+                  padding: '10px 12px',
+                  fontSize: '13px', color: theme.colors.textPrimary,
+                  outline: 'none', resize: 'none' as const,
+                  transition: 'border-color 0.2s',
+                }}
+                onFocus={e => e.target.style.borderColor = theme.colors.borderAccent}
+                onBlur={e => e.target.style.borderColor = theme.colors.border}
+              />
+            </div>
+          </div>
+
+          {/* Resumen */}
+          <div style={{
+            width: '280px', flexShrink: 0,
+            background: theme.colors.bgCard,
+            border: `1px solid ${theme.colors.border}`,
+            borderRadius: theme.radius.xl,
+            padding: '1.5rem',
+            position: 'sticky', top: '80px',
+          }}>
+            <h2 style={{ color: theme.colors.textPrimary, fontSize: '15px', fontWeight: 600, margin: '0 0 1.25rem', letterSpacing: '1px' }}>
+              RESUMEN
+            </h2>
+
+            {carrito?.items.map(item => (
+              <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <span style={{ color: theme.colors.textMuted, fontSize: '13px' }}>
+                  {item.producto.nombre} x{item.cantidad}
+                </span>
+                <span style={{ color: theme.colors.textSecondary, fontSize: '13px' }}>
+                  {(item.producto.precio * item.cantidad).toFixed(2)} €
+                </span>
+              </div>
+            ))}
+
+            <div style={{
+              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+              padding: '1rem 0',
+              borderTop: `1px solid ${theme.colors.border}`,
+              marginTop: '0.75rem',
+            }}>
+              <span style={{ color: theme.colors.textPrimary, fontSize: '15px', fontWeight: 600 }}>Total</span>
+              <span style={{ color: theme.colors.accent, fontSize: '22px', fontWeight: 800 }}>
+                {total?.toFixed(2)} €
               </span>
             </div>
-          ))}
-          <div style={{
-            display: 'flex', justifyContent: 'space-between',
-            paddingTop: '1rem', borderTop: '0.5px solid #2e3244', marginTop: '0.5rem',
-          }}>
-            <span style={{ color: '#f0f0f0', fontSize: '15px', fontWeight: 500 }}>Total</span>
-            <span style={{ color: '#1d9e75', fontSize: '18px', fontWeight: 700 }}>
-              {total?.toFixed(2)} €
-            </span>
-          </div>
 
-          <button
-            onClick={handleCrearOrden}
-            disabled={loading || !direccion.trim()}
-            style={{
-              width: '100%', background: '#1d9e75', color: '#fff',
-              border: 'none', borderRadius: '8px', padding: '11px',
-              fontSize: '14px', fontWeight: 500, cursor: 'pointer',
-              marginTop: '1.5rem',
-              opacity: loading || !direccion.trim() ? 0.5 : 1,
-            }}
-          >
-            {loading ? 'Creando pedido...' : 'Confirmar pedido'}
-          </button>
+            <button
+              onClick={handleCrearOrden}
+              disabled={loading || !direccion.trim()}
+              style={{
+                width: '100%',
+                background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
+                color: '#fff', border: 'none',
+                borderRadius: theme.radius.lg,
+                padding: '13px',
+                fontSize: '13px', fontWeight: 600,
+                cursor: 'pointer', letterSpacing: '2px',
+                boxShadow: theme.shadow.accent,
+                opacity: loading || !direccion.trim() ? 0.4 : 1,
+                transition: 'opacity 0.2s',
+              }}
+            >
+              {loading ? 'CREANDO PEDIDO...' : 'CONFIRMAR PEDIDO'}
+            </button>
+          </div>
         </div>
       </div>
     </div>

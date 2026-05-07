@@ -157,7 +157,7 @@ const NavBarPublica = () => {
 
             {/* Salir */}
             <button
-              onClick={() => { logout(); navigate('/') }}
+              onClick={() => { logout(); navigate('/Login') }}
               style={{
                 background: 'none',
                 border: `1px solid ${theme.colors.border}`,
