@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode} from 'react'
+import { createContext, useContext, useEffect, useState, type ReactNode} from 'react'
 
 interface User  {
     id: number
@@ -16,6 +16,17 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
+
+const isTokenExpired = (token: string): boolean => {
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]))
+    return payload.exp * 1000 < Date.now()
+  } catch {
+    return true
+  }
+}
+
+
 
 export const AuthProvider = ({ children }: {children: ReactNode}) => {
     const [token, setToken] = useState<string | null>(
@@ -39,6 +50,25 @@ export const AuthProvider = ({ children }: {children: ReactNode}) => {
         localStorage.removeItem('token')
         localStorage.removeItem('user')
     }
+
+    useEffect(() => {
+    if (!token) return
+
+    // Comprobar inmediatamente
+    if (isTokenExpired(token)) {
+        logout()
+        return
+    }
+
+    // Comprobar cada minuto
+    const interval = setInterval(() => {
+        if (isTokenExpired(token)) {
+        logout()
+        }
+    }, 60000)
+
+    return () => clearInterval(interval)
+    }, [token])
 
     return (
         <AuthContext.Provider value={{user, token, login, logout, isAuthenticated: !!token}}>
