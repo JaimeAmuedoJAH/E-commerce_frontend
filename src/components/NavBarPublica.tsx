@@ -22,7 +22,7 @@ const NavBarPublica = () => {
 
   return (
     <nav style={{
-      background: `${theme.colors.bg}ee`,
+      background: `${theme.colors.bgNav}ee`,
       backdropFilter: 'blur(12px)',
       borderBottom: `1px solid ${theme.colors.border}`,
       padding: '0 2.5rem',
