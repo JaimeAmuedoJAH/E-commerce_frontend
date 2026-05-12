@@ -1,50 +1,78 @@
 export const theme = {
   colors: {
-    // Fondos
-    bg: '#f5ede0',
-    bgCard: '#ede0cf',
-    bgCardHover: '#e8d8c4',
-    bgInput: '#faf5ee',
+    // Fondos - Degradados modernos
+    bg: '#ffffff',
+    bgCard: '#f8fafc',
+    bgCardHover: '#f1f5f9',
+    bgInput: '#ffffff',
+    bgGradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    bgGradient2: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
 
-    // Navbar
-    bgNav: '#1a1612',
+    // Navbar - Oscuro elegante
+    bgNav: '#0f1419',
+    bgNavGradient: 'linear-gradient(90deg, #0f1419 0%, #1a2234 100%)',
 
     // Bordes
-    border: '#d4b896',
-    borderHover: '#c4a880',
-    borderAccent: '#c9a96e',
+    border: '#e2e8f0',
+    borderHover: '#cbd5e1',
+    borderAccent: '#667eea',
+    borderLight: '#f1f5f9',
 
     // Texto
-    textPrimary: '#1a1612',
-    textSecondary: '#6b5b4e',
-    textMuted: '#8a7a6a',
+    textPrimary: '#0f1419',
+    textSecondary: '#475569',
+    textMuted: '#64748b',
+    textLight: '#94a3b8',
 
-    // Texto navbar (claro para contrastar con fondo negro)
-    textNav: '#e8dcc8',
-    textNavMuted: '#8a7a6a',
+    // Texto navbar (claro para contrastar)
+    textNav: '#f1f5f9',
+    textNavMuted: '#94a3b8',
 
-    // Acento dorado/tostado
-    accent: '#c9a96e',
-    accentDark: '#a8854a',
-    accentLight: '#e0c48a',
-    accentBg: '#c9a96e18',
+    // Acento - Púrpura/Azul moderno
+    accent: '#667eea',
+    accentDark: '#5568d3',
+    accentLight: '#a5b4fc',
+    accentBg: '#667eea0f',
+    accentBgStrong: '#667eea1a',
+
+    // Secundario - Rosa/Coral
+    secondary: '#f5576c',
+    secondaryLight: '#fb7185',
+    secondaryBg: '#f5576c0f',
 
     // Estados
-    error: '#8b2a2a',
-    errorBg: '#8b2a2a10',
-    errorBorder: '#8b2a2a40',
-    warning: '#b8860b',
-    success: '#4a7a48',
+    error: '#dc2626',
+    errorBg: '#fee2e2',
+    errorBorder: '#fecaca',
+    warning: '#f59e0b',
+    warningBg: '#fef3c7',
+    success: '#10b981',
+    successBg: '#d1fae5',
+    info: '#3b82f6',
+    infoBg: '#dbeafe',
   },
   radius: {
-    sm: '6px',
-    md: '10px',
-    lg: '14px',
+    xs: '4px',
+    sm: '8px',
+    md: '12px',
+    lg: '16px',
     xl: '20px',
     full: '999px',
   },
   shadow: {
-    card: '0 4px 24px rgba(26,22,18,0.08)',
-    accent: '0 0 20px rgba(201,169,110,0.2)',
+    xs: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+    sm: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+    md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+    xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+    card: '0 8px 32px rgba(102, 126, 234, 0.12)',
+    cardHover: '0 16px 48px rgba(102, 126, 234, 0.16)',
+    accent: '0 0 20px rgba(102, 126, 234, 0.2)',
+    glow: '0 0 30px rgba(245, 87, 108, 0.15)',
+  },
+  transition: {
+    fast: '150ms cubic-bezier(0.4, 0, 0.2, 1)',
+    base: '300ms cubic-bezier(0.4, 0, 0.2, 1)',
+    slow: '500ms cubic-bezier(0.4, 0, 0.2, 1)',
   },
 }

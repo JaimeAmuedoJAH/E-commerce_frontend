@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useCarrito } from '../context/CarritoContext'
 import { theme } from '../styles/theme'
+import '../styles/components.css'
 
 const NavBarPublica = () => {
   const navigate = useNavigate()
@@ -21,10 +22,10 @@ const NavBarPublica = () => {
   }
 
   return (
-    <nav style={{
-      background: `${theme.colors.bgNav}ee`,
+    <nav className="navbar" style={{
+      background: `linear-gradient(90deg, ${theme.colors.bgNav} 0%, #1a2234 100%)`,
       backdropFilter: 'blur(12px)',
-      borderBottom: `1px solid ${theme.colors.border}`,
+      borderBottom: `1px solid rgba(102, 126, 234, 0.1)`,
       padding: '0 2.5rem',
       height: '64px',
       display: 'flex',
@@ -33,6 +34,7 @@ const NavBarPublica = () => {
       position: 'sticky',
       top: 0,
       zIndex: 100,
+      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.15)',
     }}>
 
       {/* Logo */}
@@ -43,25 +45,42 @@ const NavBarPublica = () => {
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
+          transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
         }}
+        className="hover-scale"
       >
         <div style={{
           width: '32px', height: '32px',
           background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
           borderRadius: theme.radius.md,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: theme.shadow.accent,
-        }}>
+          boxShadow: '0 0 20px rgba(102, 126, 234, 0.2)',
+          transition: 'all 300ms ease',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.boxShadow = '0 0 40px rgba(102, 126, 234, 0.4)'
+          e.currentTarget.style.transform = 'rotate(-5deg) scale(1.1)'
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.boxShadow = '0 0 20px rgba(102, 126, 234, 0.2)'
+          e.currentTarget.style.transform = 'rotate(0) scale(1)'
+        }}
+        >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
             stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.38-1 1.73V7l8 5v1H3v-1l8-5V5.73A2 2 0 0 1 10 4a2 2 0 0 1 2-2z"/>
           </svg>
         </div>
         <span style={{
-          color: theme.colors.textPrimary,
+          color: '#f1f5f9',
           fontSize: '18px',
           fontWeight: 700,
           letterSpacing: '5px',
+          background: 'linear-gradient(135deg, #667eea 0%, #f5576c 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          transition: 'all 300ms ease',
         }}>
           NOIR
         </span>
@@ -78,20 +97,24 @@ const NavBarPublica = () => {
           <button
             key={link.label}
             onClick={link.action}
+            className="navbar-link"
             style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              color: theme.colors.textSecondary,
-              fontSize: '13px', fontWeight: 400,
-              padding: '6px 14px', borderRadius: theme.radius.md,
-              transition: 'all 0.2s',
+              background: 'none', 
+              border: 'none', 
+              cursor: 'pointer',
+              color: '#94a3b8',
+              fontSize: '14px', 
+              fontWeight: 500,
+              padding: '8px 16px', 
+              borderRadius: theme.radius.md,
+              transition: 'color 300ms ease',
+              position: 'relative',
             }}
             onMouseEnter={e => {
-              e.currentTarget.style.color = theme.colors.textPrimary
-              e.currentTarget.style.background = theme.colors.bgCard
+              e.currentTarget.style.color = '#667eea'
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.color = theme.colors.textSecondary
-              e.currentTarget.style.background = 'none'
+              e.currentTarget.style.color = '#94a3b8'
             }}
           >
             {link.label}
@@ -107,23 +130,29 @@ const NavBarPublica = () => {
             <button
               onClick={() => navigate('/carrito')}
               style={{
-                background: theme.colors.bgCard,
+                background: 'transparent',
                 border: `1px solid ${theme.colors.border}`,
                 borderRadius: theme.radius.md,
                 padding: '7px 14px',
                 cursor: 'pointer',
                 display: 'flex', alignItems: 'center', gap: '7px',
-                color: theme.colors.textSecondary,
+                color: theme.colors.textMuted,
                 fontSize: '13px',
-                transition: 'all 0.2s',
+                transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+                position: 'relative',
               }}
+              className="hover-lift"
               onMouseEnter={e => {
-                e.currentTarget.style.borderColor = theme.colors.borderAccent
-                e.currentTarget.style.color = theme.colors.accent
+                e.currentTarget.style.borderColor = '#667eea'
+                e.currentTarget.style.color = '#667eea'
+                e.currentTarget.style.background = 'rgba(102, 126, 234, 0.1)'
+                e.currentTarget.style.boxShadow = '0 0 20px rgba(102, 126, 234, 0.2)'
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.borderColor = theme.colors.border
-                e.currentTarget.style.color = theme.colors.textSecondary
+                e.currentTarget.style.color = theme.colors.textMuted
+                e.currentTarget.style.background = 'transparent'
+                e.currentTarget.style.boxShadow = 'none'
               }}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -134,12 +163,13 @@ const NavBarPublica = () => {
               Carrito
               {totalItems > 0 && (
                 <span style={{
-                  background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
+                  background: 'linear-gradient(135deg, #667eea, #764ba2)',
                   color: '#fff',
                   borderRadius: theme.radius.full,
-                  padding: '1px 7px',
+                  padding: '2px 8px',
                   fontSize: '11px',
                   fontWeight: 700,
+                  animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                 }}>
                   {totalItems}
                 </span>
@@ -148,7 +178,7 @@ const NavBarPublica = () => {
 
             {/* Nombre */}
             <span style={{
-              color: theme.colors.textMuted,
+              color: '#94a3b8',
               fontSize: '13px',
               padding: '0 4px',
             }}>
@@ -163,14 +193,15 @@ const NavBarPublica = () => {
                 border: `1px solid ${theme.colors.border}`,
                 borderRadius: theme.radius.md,
                 padding: '7px 14px',
-                color: theme.colors.error,
+                color: '#f87171',
                 fontSize: '13px',
                 cursor: 'pointer',
-                transition: 'all 0.2s',
+                transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
               }}
+              className="hover-lift"
               onMouseEnter={e => {
-                e.currentTarget.style.background = theme.colors.errorBg
-                e.currentTarget.style.borderColor = theme.colors.error
+                e.currentTarget.style.background = '#fee2e2'
+                e.currentTarget.style.borderColor = '#dc2626'
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.background = 'none'
@@ -185,22 +216,26 @@ const NavBarPublica = () => {
             <button
               onClick={() => navigate('/login')}
               style={{
-                background: 'none',
+                background: 'transparent',
                 border: `1px solid ${theme.colors.border}`,
                 borderRadius: theme.radius.md,
                 padding: '7px 16px',
-                color: theme.colors.textSecondary,
+                color: theme.colors.textMuted,
                 fontSize: '13px',
+                fontWeight: 500,
                 cursor: 'pointer',
-                transition: 'all 0.2s',
+                transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
               }}
+              className="hover-lift"
               onMouseEnter={e => {
-                e.currentTarget.style.borderColor = theme.colors.borderHover
-                e.currentTarget.style.color = theme.colors.textPrimary
+                e.currentTarget.style.borderColor = '#667eea'
+                e.currentTarget.style.color = '#667eea'
+                e.currentTarget.style.background = 'rgba(102, 126, 234, 0.1)'
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.borderColor = theme.colors.border
-                e.currentTarget.style.color = theme.colors.textSecondary
+                e.currentTarget.style.color = theme.colors.textMuted
+                e.currentTarget.style.background = 'transparent'
               }}
             >
               Iniciar sesión
@@ -208,7 +243,7 @@ const NavBarPublica = () => {
             <button
               onClick={() => navigate('/registro')}
               style={{
-                background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
+                background: 'linear-gradient(135deg, #667eea, #764ba2)',
                 border: 'none',
                 borderRadius: theme.radius.md,
                 padding: '7px 16px',
@@ -216,11 +251,16 @@ const NavBarPublica = () => {
                 fontSize: '13px',
                 fontWeight: 600,
                 cursor: 'pointer',
-                boxShadow: theme.shadow.accent,
-                transition: 'opacity 0.2s',
+                boxShadow: '0 8px 24px rgba(102, 126, 234, 0.3)',
+                transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
               }}
-              onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
-              onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+              className="hover-lift"
+              onMouseEnter={e => {
+                e.currentTarget.style.boxShadow = '0 12px 32px rgba(102, 126, 234, 0.4)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(102, 126, 234, 0.3)'
+              }}
             >
               Registrarse
             </button>
