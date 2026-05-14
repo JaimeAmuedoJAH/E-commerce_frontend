@@ -14,6 +14,7 @@ const Pago = () => {
   const [tarjetas, setTarjetas] = useState<Tarjeta[]>([])
   const [tarjetaSeleccionada, setTarjetaSeleccionada] = useState<Tarjeta | null>(null)
   const [cvv, setCvv] = useState('')
+  const [numeroTarjetaInput, setNumeroTarjetaInput] = useState('') // ✅ Añadido
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [mostrarFormNueva, setMostrarFormNueva] = useState(false)
@@ -34,6 +35,7 @@ const Pago = () => {
 
   const handlePagar = async () => {
     if (!tarjetaSeleccionada || !carrito || !user) return
+    if (!numeroTarjetaInput) { setError('Introduce el número de tarjeta'); return }
     if (!cvv) { setError('Introduce el CVV'); return }
     setError(null)
     setLoading(true)
@@ -41,7 +43,7 @@ const Pago = () => {
       const { data } = await api.post<PagoResponse>('/pagos/procesar', {
         carritoId: carrito.id,
         clienteId: user.id,
-        numeroTarjeta: tarjetaSeleccionada.numeroTarjeta,
+        numeroTarjeta: numeroTarjetaInput, // ✅ número real introducido por el usuario
         fechaExpiracion: tarjetaSeleccionada.fechaExpiracion,
         cvv,
         titular: tarjetaSeleccionada.titular,
@@ -170,7 +172,11 @@ const Pago = () => {
               {tarjetas.map(tarjeta => (
                 <div
                   key={tarjeta.id}
-                  onClick={() => { setTarjetaSeleccionada(tarjeta); setCvv('') }}
+                  onClick={() => {
+                    setTarjetaSeleccionada(tarjeta)
+                    setCvv('')
+                    setNumeroTarjetaInput('') // ✅ Limpiar al cambiar tarjeta
+                  }}
                   style={{
                     background: tarjetaSeleccionada?.id === tarjeta.id
                       ? theme.colors.accentBg
@@ -194,7 +200,6 @@ const Pago = () => {
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                     <div>
-                      {/* Número tarjeta */}
                       <div style={{ display: 'flex', gap: '8px', marginBottom: '8px', alignItems: 'center' }}>
                         <div style={{
                           width: '28px', height: '18px',
@@ -224,10 +229,21 @@ const Pago = () => {
 
                   {tarjetaSeleccionada?.id === tarjeta.id && (
                     <div style={{ marginTop: '1rem' }} onClick={e => e.stopPropagation()}>
-                      <div style={{
-                        height: '1px', background: theme.colors.border,
-                        margin: '0 0 1rem',
-                      }} />
+                      <div style={{ height: '1px', background: theme.colors.border, margin: '0 0 1rem' }} />
+
+                      {/* ✅ Campo número de tarjeta */}
+                      <label style={labelStyle}>Número de tarjeta</label>
+                      <input
+                        type="text"
+                        value={numeroTarjetaInput}
+                        onChange={e => setNumeroTarjetaInput(e.target.value)}
+                        placeholder="1234567890123456"
+                        maxLength={16}
+                        style={{ ...inputStyle, marginBottom: '0.75rem' }}
+                        onFocus={e => e.target.style.borderColor = theme.colors.borderAccent}
+                        onBlur={e => e.target.style.borderColor = theme.colors.border}
+                      />
+
                       <label style={labelStyle}>CVV de seguridad</label>
                       <input
                         type="password" value={cvv}
@@ -415,7 +431,7 @@ const Pago = () => {
 
             <button
               onClick={handlePagar}
-              disabled={!tarjetaSeleccionada || !cvv || loading}
+              disabled={!tarjetaSeleccionada || !cvv || !numeroTarjetaInput || loading}
               style={{
                 width: '100%',
                 background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
@@ -425,7 +441,7 @@ const Pago = () => {
                 fontSize: '13px', fontWeight: 600,
                 cursor: 'pointer', letterSpacing: '2px',
                 boxShadow: theme.shadow.accent,
-                opacity: !tarjetaSeleccionada || !cvv || loading ? 0.4 : 1,
+                opacity: !tarjetaSeleccionada || !cvv || !numeroTarjetaInput || loading ? 0.4 : 1,
                 transition: 'opacity 0.2s',
               }}
             >
