@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import './styles/animations.css'
 import Login from './pages/Login'
 import Registro from './pages/Registro'
 import ProtectedRoute from './components/ProtectedRoute'
