@@ -176,6 +176,6 @@ Este frontend está pensado para integrarse con un backend con APIs REST similar
 
 ---
 
-**Versión**: 0.0.0  
+**Versión**: 1.0.0  
 **Autor**: Jaime Amuedo JAH
 
