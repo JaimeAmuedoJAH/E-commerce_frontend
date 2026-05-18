@@ -1,7 +1,6 @@
 # 🛍️ NOIR — E-commerce Frontend
 
-Frontend de la plataforma de moda **NOIR**, desarrollado con **TypeScript** y **Vite**. Diseño dark mode minimalista con integración completa al backend Spring Boot.
-
+Frontend de la plataforma de moda **NOIR**, desarrollado con **TypeScript** y **Vite**.
 ---
 
 ## 🚀 Tecnologías
