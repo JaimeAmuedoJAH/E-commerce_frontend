@@ -1,34 +1,39 @@
 # 🛍️ NOIR — E-commerce Frontend
 
-Frontend de la plataforma de moda **NOIR**, desarrollado con **TypeScript** y **Vite**.
+Frontend de la tienda de moda **NOIR**, construido con **React**, **TypeScript** y **Vite**.
 ---
 
 ## 🚀 Tecnologías
 
 | Tecnología | Versión |
 |---|---|
-| React | 19 |
-| TypeScript | 5 |
-| Vite | 6 |
-| React Router DOM | 7 |
-| Axios | - |
-| Tailwind CSS | 3 |
+| React | 19.2.5 |
+| TypeScript | 6.0.2 |
+| Vite | 8.0.9 |
+| React Router DOM | 7.14.2 |
+| Axios | 1.15.2 |
+| Tailwind CSS | 3.4.19 |
+| ESLint | 9.39.4 |
 
 ---
 
-## 📐 Arquitectura
+## 📐 Estructura del proyecto
 
 ```
 src/
-├── api/                   # Configuración de axios y llamadas al backend
-│   └── axiosConfig.ts
-├── components/            # Componentes reutilizables
-│   ├── NavbarPublica.tsx   # Navbar principal (pública y privada)
-│   └── ProtectedRoute.tsx  # Guarda de rutas privadas
-├── context/               # Estado global con Context API
-│   ├── AuthContext.tsx     # Sesión de usuario y JWT
-│   └── CarritoContext.tsx  # Estado del carrito
-├── pages/                 # Páginas de la aplicación
+├── api/
+│   └── axiosConfig.ts           # Cliente Axios con baseURL y token en cabeceras
+├── components/
+│   ├── EnhancedSections.tsx     # Sección de UI mejorada
+│   ├── HeroSection.tsx          # Hero reusable (página Home)
+│   ├── NavBarPublica.tsx        # Navbar compartido entre rutas públicas y privadas
+│   ├── ProductCardEnhanced.tsx  # Tarjeta avanzada para productos
+│   ├── ProductoCard.tsx         # Tarjeta de producto básica
+│   └── ProtectedRoute.tsx       # Ruta protegida que valida auth
+├── context/
+│   ├── AuthContext.tsx          # Autenticación y sesión de usuario
+│   └── CarritoContext.tsx       # Estado del carrito de compras
+├── pages/
 │   ├── Home.tsx
 │   ├── Login.tsx
 │   ├── Registro.tsx
@@ -40,9 +45,13 @@ src/
 │   ├── OrdenNueva.tsx
 │   ├── OrdenConfirmacion.tsx
 │   └── Ordenes.tsx
-├── types/                 # Interfaces TypeScript
-│   └── index.ts
-└── App.tsx
+├── styles/
+│   ├── animations.css
+│   └── theme.ts                 # Variables de color y estilos base
+├── types/
+│   └── index.ts                 # Tipos e interfaces TypeScript
+├── App.tsx
+└── index.css
 ```
 
 ---
@@ -62,9 +71,9 @@ cd E-commerce_frontend
 npm install
 ```
 
-### URL del backend
+### Configuración del backend
 
-Configurada en `src/api/axiosConfig.ts`:
+La URL del backend se define en `src/api/axiosConfig.ts`:
 
 ```ts
 const api = axios.create({
@@ -72,15 +81,15 @@ const api = axios.create({
 })
 ```
 
-Cámbiala si tu backend corre en otro puerto.
+Cámbiala si tu backend corre en otro puerto o ruta.
 
-### Arrancar en desarrollo
+### Ejecutar en desarrollo
 
 ```bash
 npm run dev
 ```
 
-La app estará disponible en: `http://localhost:5173`
+Abrir en: `http://localhost:5173`
 
 ### Build para producción
 
@@ -88,25 +97,32 @@ La app estará disponible en: `http://localhost:5173`
 npm run build
 ```
 
+### Otros scripts
+
+```bash
+npm run lint
+npm run preview
+```
+
 ---
 
-## 📱 Páginas
+## 📱 Rutas principales
 
 ### Públicas
 | Ruta | Descripción |
 |---|---|
-| `/` | Landing page de NOIR con hero, colecciones y acerca de |
-| `/login` | Inicio de sesión |
-| `/registro` | Registro de nuevo usuario |
+| `/` | Landing page con hero, colecciones y sección “Acerca de” |
+| `/login` | Página de inicio de sesión |
+| `/registro` | Página de registro de usuario |
 
-### Privadas (requieren autenticación)
+### Privadas (requieren login)
 | Ruta | Descripción |
 |---|---|
 | `/categorias` | Listado de categorías con buscador |
-| `/productos/:categoriaId` | Productos de una categoría con filtros |
+| `/productos/:categoriaId` | Productos filtrados por categoría |
 | `/producto/:productoId` | Detalle de producto |
-| `/carrito` | Carrito de compra |
-| `/pago` | Pasarela de pago con tarjetas guardadas |
+| `/carrito` | Carrito de compras |
+| `/pago` | Pasarela de pago ficticia |
 | `/ordenes/nueva` | Confirmación de dirección de envío |
 | `/ordenes/confirmacion` | Confirmación del pedido |
 | `/ordenes` | Historial de pedidos |
@@ -115,70 +131,51 @@ npm run build
 
 ## 🔐 Autenticación
 
-La autenticación se gestiona con JWT almacenado en `localStorage`. El `AuthContext` expone:
+La app utiliza JWT almacenado en `localStorage`. El `AuthContext` gestiona:
 
-- `user` → datos del usuario logueado
-- `token` → JWT
+- `user` → datos del usuario autenticado
+- `token` → JWT de sesión
 - `login()` → guarda token y usuario
-- `logout()` → limpia sesión
-- `isAuthenticated` → booleano
+- `logout()` → elimina sesión
+- `isAuthenticated` → estado de autenticación
 
-El `ProtectedRoute` redirige automáticamente a `/login` si no hay sesión activa.
+El componente `ProtectedRoute` protege todas las rutas privadas y redirige a `/login` si no hay sesión activa.
 
 ---
 
 ## 🛒 Carrito
 
-El `CarritoContext` gestiona el carrito sincronizado con el backend:
+`CarritoContext` maneja el estado del carrito y la sincronización con el backend:
 
-- Al loguearse se carga el carrito existente del usuario
-- `añadirProducto()` → crea o actualiza el carrito
-- `actualizarCantidad()` → actualiza cantidad de un item
-- `eliminarProducto()` → elimina un item (si el carrito queda vacío lo elimina)
-- `vaciarCarrito()` → limpia el estado local
-
----
-
-## 💳 Pasarela de Pago
-
-Flujo completo de pago ficticio:
-
-1. Usuario selecciona tarjeta guardada o añade una nueva
-2. Introduce el CVV
-3. Frontend llama a `POST /pagos/procesar`
-4. Si exitoso → se crea la orden con el código de transacción
-5. Redirige a confirmación
+- Carga el carrito del usuario al iniciar sesión
+- `añadirProducto()` → agrega o actualiza un artículo
+- `actualizarCantidad()` → cambia la cantidad de un producto
+- `eliminarProducto()` → elimina un artículo del carrito
+- `vaciarCarrito()` → limpia el carrito local
 
 ---
 
-## 🎨 Diseño
+## 🎨 Diseño y estilo
 
-- **Dark mode** completo con fondo `#0f1117`
-- **Color de acento** verde `#1d9e75`
-- **Tipografía** del sistema, sin fuentes externas
-- Todos los estilos con **inline styles** para máxima compatibilidad
-
----
-
-## 🗂️ Milestones GitHub
-
-| Milestone | Descripción |
-|---|---|
-| Milestone 1 | Setup y configuración |
-| Milestone 2 | Autenticación (login, registro, JWT) |
-| Milestone 3 | Catálogo (categorías, productos, filtros) |
-| Milestone 4 | Carrito |
-| Milestone 5 | Órdenes |
-| Milestone 6 | Pasarela de pago ficticia |
+- UI basada principalmente en **inline styles** con un archivo de tema en `src/styles/theme.ts`
+- Se usa un diseño inspirado en **dark mode** con acentos claros
+- Incluye soporte y configuración para **Tailwind CSS** y **PostCSS**
 
 ---
 
-## 🔗 Repositorio Backend
+## 🔗 Backend sugerido
 
-[E-commerce Backend](https://github.com/JaimeAmuedoJAH/E-commerce_backend)
+Este frontend está pensado para integrarse con un backend con APIs REST similares a:
+- `/categorias/all`
+- `/productos/:categoriaId`
+- `/usuarios/login`
+- `/usuarios/register`
+- `/carrito`
+- `/pago`
+- `/ordenes`
 
 ---
 
-**Versión**: 1.0.0  
-**Última actualización**: Mayo 2026  
+**Versión**: 0.0.0  
 **Autor**: Jaime Amuedo JAH
+
