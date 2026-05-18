@@ -39,6 +39,7 @@ const Ordenes = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [ordenAbierta, setOrdenAbierta] = useState<number | null>(null)
+  const [cancelingOrderId, setCancelingOrderId] = useState<number | null>(null)
 
   useEffect(() => {
     if (!user) return
@@ -47,6 +48,25 @@ const Ordenes = () => {
       .catch(() => setError('Error al cargar los pedidos'))
       .finally(() => setLoading(false))
   }, [user])
+
+  const handleCancelarOrden = async (ordenId: number) => {
+    const confirmar = window.confirm('¿Estás seguro de que quieres cancelar este pedido?')
+    if (!confirmar) return
+
+    setError(null)
+    setCancelingOrderId(ordenId)
+
+    try {
+      await api.put(`/ordenes/${ordenId}/cancelar`)
+      setOrdenes(prevOrdenes => prevOrdenes.map(orden => (
+        orden.id === ordenId ? { ...orden, estado: 'CANCELADA' } : orden
+      )))
+    } catch (err) {
+      setError('No se pudo cancelar el pedido. Intenta de nuevo más tarde.')
+    } finally {
+      setCancelingOrderId(null)
+    }
+  }
 
   const formatFecha = (fecha: string) => new Date(fecha).toLocaleDateString('es-ES', {
     day: '2-digit', month: 'long', year: 'numeric',
@@ -249,6 +269,26 @@ const Ordenes = () => {
                           {orden.codigoTransaccion}
                         </span>
                       </div>
+                      {orden.estado !== 'CANCELADA' && (
+                        <button
+                          onClick={() => handleCancelarOrden(orden.id)}
+                          disabled={cancelingOrderId === orden.id}
+                          style={{
+                            marginTop: '1rem',
+                            alignSelf: 'flex-start',
+                            background: theme.colors.error,
+                            color: '#fff',
+                            border: 'none',
+                            borderRadius: theme.radius.lg,
+                            padding: '10px 18px',
+                            fontSize: '13px',
+                            fontWeight: 600,
+                            cursor: cancelingOrderId === orden.id ? 'not-allowed' : 'pointer',
+                          }}
+                        >
+                          {cancelingOrderId === orden.id ? 'Cancelando...' : 'Cancelar pedido'}
+                        </button>
+                      )}
                     </div>
                   </div>
                 )}

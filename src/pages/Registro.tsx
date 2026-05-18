@@ -75,17 +75,25 @@ const Registro = () => {
   return (
     <div style={{
       minHeight: '100vh', width: '100%',
-      background: theme.colors.bg,
+      background: `linear-gradient(180deg, ${theme.colors.bg} 0%, ${theme.colors.bgCard} 65%)`,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       position: 'relative', overflow: 'hidden',
     }}>
 
-      {/* Fondo decorativo */}
       <div style={{
-        position: 'absolute', top: '30%', left: '50%',
-        transform: 'translateX(-50%)',
-        width: '500px', height: '500px',
-        background: `radial-gradient(circle, ${theme.colors.accent}06 0%, transparent 70%)`,
+        position: 'absolute', top: '12%', right: '10%',
+        width: '220px', height: '220px',
+        borderRadius: '50%',
+        background: `rgba(81, 92, 242, 0.16)`,
+        filter: 'blur(55px)',
+        pointerEvents: 'none',
+      }} />
+      <div style={{
+        position: 'absolute', bottom: '10%', left: '8%',
+        width: '200px', height: '200px',
+        borderRadius: '50%',
+        background: `rgba(109, 110, 143, 0.10)`,
+        filter: 'blur(45px)',
         pointerEvents: 'none',
       }} />
 
@@ -93,27 +101,35 @@ const Registro = () => {
         background: theme.colors.bgCard,
         border: `1px solid ${theme.colors.border}`,
         borderRadius: theme.radius.xl,
-        padding: '2.5rem',
-        width: '100%', maxWidth: '380px',
+        padding: '1rem',
+        width: '100%', maxWidth: '360px',
         boxShadow: theme.shadow.card,
         position: 'relative',
+        overflow: 'hidden',
       }}>
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: `linear-gradient(rgba(255,255,255,0.86), rgba(255,255,255,0.86)), url(${new URL('../assets/Logo_noir.png', import.meta.url).href}) center/cover no-repeat`,
+          pointerEvents: 'none',
+        }} />
+        <div style={{ position: 'relative', zIndex: 1 }}>
 
         {/* Logo */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{
             width: '48px', height: '48px',
-            background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
             borderRadius: theme.radius.lg,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             margin: '0 auto 12px',
             boxShadow: theme.shadow.accent,
+            overflow: 'hidden',
+            background: theme.colors.bg,
           }}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-              stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
+            <img
+              src={new URL('../assets/Logo_noir.png', import.meta.url).href}
+              alt="NOIR logo"
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
           </div>
           <span style={{
             color: theme.colors.textPrimary, fontSize: '20px',
@@ -261,6 +277,7 @@ const Registro = () => {
             Inicia sesión
           </a>
         </p>
+        </div>
       </div>
     </div>
   )

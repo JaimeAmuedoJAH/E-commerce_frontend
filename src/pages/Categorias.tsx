@@ -4,6 +4,19 @@ import api from '../api/axiosConfig'
 import { theme } from '../styles/theme'
 import type { Categoria } from '../types'
 
+const categoriaImagenes: Record<string, string> = {
+  'Camisetas': new URL('../assets/camisetas.png', import.meta.url).href,
+  'Pantalones': new URL('../assets/pantalones.png', import.meta.url).href,
+  'Vestidos': new URL('../assets/vestidos.png', import.meta.url).href,
+  'Chaquetas': new URL('../assets/chaquetas.png', import.meta.url).href,
+  'Abrigos': new URL('../assets/abrigos.png', import.meta.url).href,
+  'Calzado': new URL('../assets/calzado.png', import.meta.url).href,
+  'Accesorios': new URL('../assets/accesorios.png', import.meta.url).href,
+  'Ropa Interior': new URL('../assets/ropa_interior.png', import.meta.url).href,
+  'Deportivo': new URL('../assets/deportivo.png', import.meta.url).href,
+  'Bolsos': new URL('../assets/bolsos.png', import.meta.url).href,
+}
+
 const Categorias = () => {
   const navigate = useNavigate()
   const [categorias, setCategorias] = useState<Categoria[]>([])
@@ -104,58 +117,53 @@ const Categorias = () => {
           gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
           gap: '1.25rem',
         }}>
-          {categoriasFiltradas.map(categoria => (
-            <div
-              key={categoria.id}
-              onClick={() => navigate(`/productos/${categoria.id}`)}
-              style={{
-                background: theme.colors.bgCard,
-                border: `1px solid ${theme.colors.border}`,
-                borderRadius: theme.radius.xl,
-                padding: '1.75rem',
-                cursor: 'pointer',
-                transition: 'all 0.3s',
-                position: 'relative', overflow: 'hidden',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = theme.colors.borderAccent
-                e.currentTarget.style.transform = 'translateY(-3px)'
-                e.currentTarget.style.boxShadow = theme.shadow.accent
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = theme.colors.border
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = 'none'
-              }}
-            >
-              {/* Icono */}
-              <div style={{
-                width: '44px', height: '44px',
-                background: theme.colors.accentBg,
-                border: `1px solid ${theme.colors.borderAccent}40`,
-                borderRadius: theme.radius.md,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                marginBottom: '1rem',
-                color: theme.colors.accent,
-              }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
-                  <line x1="7" y1="7" x2="7.01" y2="7"/>
-                </svg>
-              </div>
+          {categoriasFiltradas.map(categoria => {
+            const imageUrl = categoriaImagenes[categoria.nombre]
+            return (
+              <div
+                key={categoria.id}
+                onClick={() => navigate(`/productos/${categoria.id}`)}
+                style={{
+                  background: imageUrl
+                    ? `url(${imageUrl}) center/cover no-repeat`
+                    : theme.colors.bgCard,
+                  border: `1px solid ${theme.colors.border}`,
+                  borderRadius: theme.radius.xl,
+                  padding: '1.75rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s',
+                  position: 'relative', overflow: 'hidden',
+                  color: imageUrl ? '#fff' : theme.colors.textPrimary,
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = theme.colors.borderAccent
+                  e.currentTarget.style.transform = 'translateY(-3px)'
+                  e.currentTarget.style.boxShadow = theme.shadow.accent
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = theme.colors.border
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = 'none'
+                }}
+              >
+                {imageUrl && (
+                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(0, 0, 0, 0.24)' }} />
+                )}
 
-              <h2 style={{ color: theme.colors.textPrimary, fontSize: '15px', fontWeight: 600, margin: '0 0 6px', letterSpacing: '1px' }}>
-                {categoria.nombre}
-              </h2>
-              <p style={{ color: theme.colors.textMuted, fontSize: '12px', margin: '0 0 1rem' }}>
-                {categoria.productos.length} {categoria.productos.length === 1 ? 'producto' : 'productos'}
-              </p>
-              <span style={{ color: theme.colors.accent, fontSize: '12px', fontWeight: 500 }}>
-                Ver productos →
-              </span>
-            </div>
-          ))}
+                <div style={{ position: 'relative', zIndex: 1, minHeight: '220px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+                  <h2 style={{ color: imageUrl ? '#fff' : theme.colors.textPrimary, fontSize: '15px', fontWeight: 600, margin: '0 0 6px', letterSpacing: '1px' }}>
+                    {categoria.nombre}
+                  </h2>
+                  <p style={{ color: imageUrl ? 'rgba(255,255,255,0.85)' : theme.colors.textMuted, fontSize: '12px', margin: '0 0 1rem' }}>
+                    {categoria.productos.length} {categoria.productos.length === 1 ? 'producto' : 'productos'}
+                  </p>
+                  <span style={{ color: imageUrl ? '#fff' : theme.colors.accent, fontSize: '12px', fontWeight: 500 }}>
+                    Ver productos →
+                  </span>
+                </div>
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>

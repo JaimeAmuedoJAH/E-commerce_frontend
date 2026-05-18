@@ -56,17 +56,25 @@ const Login = () => {
   return (
     <div style={{
       minHeight: '100vh', width: '100%',
-      background: theme.colors.bg,
+      background: `linear-gradient(180deg, ${theme.colors.bg} 0%, ${theme.colors.bgCard} 65%)`,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       position: 'relative', overflow: 'hidden',
     }}>
 
-      {/* Fondo decorativo */}
       <div style={{
-        position: 'absolute', top: '30%', left: '50%',
-        transform: 'translateX(-50%)',
-        width: '500px', height: '500px',
-        background: `radial-gradient(circle, ${theme.colors.accent}06 0%, transparent 70%)`,
+        position: 'absolute', top: '10%', left: '10%',
+        width: '240px', height: '240px',
+        borderRadius: '50%',
+        background: `rgba(109, 110, 143, 0.12)`,
+        filter: 'blur(60px)',
+        pointerEvents: 'none',
+      }} />
+      <div style={{
+        position: 'absolute', bottom: '8%', right: '8%',
+        width: '180px', height: '180px',
+        borderRadius: '50%',
+        background: `rgba(81, 92, 242, 0.16)`,
+        filter: 'blur(50px)',
         pointerEvents: 'none',
       }} />
 
@@ -78,22 +86,31 @@ const Login = () => {
         width: '100%', maxWidth: '380px',
         boxShadow: theme.shadow.card,
         position: 'relative',
+        overflow: 'hidden',
       }}>
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: `linear-gradient(rgba(255,255,255,0.86), rgba(255,255,255,0.86)), url(${new URL('../assets/Logo_noir.png', import.meta.url).href}) center/cover no-repeat`,
+          pointerEvents: 'none',
+        }} />
+        <div style={{ position: 'relative', zIndex: 1 }}>
 
         {/* Logo */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{
             width: '48px', height: '48px',
-            background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
             borderRadius: theme.radius.lg,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             margin: '0 auto 12px',
             boxShadow: theme.shadow.accent,
+            overflow: 'hidden',
+            background: theme.colors.bg,
           }}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-              stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.38-1 1.73V7l8 5v1H3v-1l8-5V5.73A2 2 0 0 1 10 4a2 2 0 0 1 2-2z"/>
-            </svg>
+            <img
+              src={new URL('../assets/Logo_noir.png', import.meta.url).href}
+              alt="NOIR logo"
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
           </div>
           <span style={{
             color: theme.colors.textPrimary, fontSize: '20px',
@@ -232,6 +249,7 @@ const Login = () => {
             Regístrate
           </a>
         </p>
+        </div>
       </div>
     </div>
   )

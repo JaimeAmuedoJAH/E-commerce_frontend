@@ -19,6 +19,17 @@ const iconosPorNombre: Record<string, string> = {
   'Bolsos': '👝',
 }
 
+const categoriaImagenes: Record<string, string> = {
+  'Camisetas': new URL('../assets/camisetas.png', import.meta.url).href,
+  'Pantalones': new URL('../assets/pantalones.png', import.meta.url).href,
+  'Vestidos': new URL('../assets/vestidos.png', import.meta.url).href,
+  'Chaquetas': new URL('../assets/chaquetas.png', import.meta.url).href,
+  'Accesorios': new URL('../assets/accesorios.png', import.meta.url).href,
+  'Ropa Interior': new URL('../assets/ropa_interior.png', import.meta.url).href,
+  'Deportivo': new URL('../assets/deportivo.png', import.meta.url).href,
+  'Bolsos': new URL('../assets/bolsos.png', import.meta.url).href,
+}
+
 const features = [
   {
     icono: (
@@ -88,79 +99,88 @@ const Home = () => {
         minHeight: 'calc(100vh - 64px)',
         display: 'flex', flexDirection: 'column',
         alignItems: 'center', justifyContent: 'center',
-        padding: '4rem 2rem', textAlign: 'center',
+        padding: '4rem 0', textAlign: 'center',
         position: 'relative', overflow: 'hidden',
+        width: '100%',
       }}>
         <div style={{
-          position: 'absolute', top: '20%', left: '50%',
-          transform: 'translateX(-50%)',
-          width: '600px', height: '600px',
-          background: `radial-gradient(circle, ${theme.colors.accent}08 0%, transparent 70%)`,
+          position: 'absolute', top: '50%', left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '100%', height: '100%',
+          backgroundImage: `url(${new URL('../assets/Logo_noir.png', import.meta.url).href})`,
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'clamp(300px, 50vw, 600px)',
+          opacity: 0.7,
           pointerEvents: 'none',
         }} />
 
-        <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: '8px',
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px',
           background: theme.colors.accentBg,
           border: `1px solid ${theme.colors.borderAccent}40`,
           borderRadius: theme.radius.full,
-          padding: '6px 16px', marginBottom: '2rem',
+          padding: '6px 16px', marginBottom: '16rem', position: 'relative', zIndex: 1,
         }}>
-          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: theme.colors.accent, display: 'inline-block' }} />
-          <span style={{ color: theme.colors.accent, fontSize: '12px', letterSpacing: '3px', fontWeight: 500 }}>
+          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#fff', display: 'inline-block' }} />
+          <span style={{ color: '#fff', fontSize: '12px', letterSpacing: '3px', fontWeight: 500 }}>
             NUEVA COLECCIÓN 2026
           </span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '20px', marginBottom: '1rem' }}>
-          <svg width="clamp(36px, 5vw, 72px)" height="clamp(36px, 5vw, 72px)" viewBox="0 0 24 24" fill="none"
-            stroke={theme.colors.accent} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.38-1 1.73V7l8 5v1H3v-1l8-5V5.73A2 2 0 0 1 10 4a2 2 0 0 1 2-2z"/>
-          </svg>
-          <h1 style={{
-            color: theme.colors.textPrimary,
-            fontSize: 'clamp(56px, 10vw, 112px)',
-            fontWeight: 800, letterSpacing: '16px', margin: 0, lineHeight: 1,
-            background: `linear-gradient(135deg, ${theme.colors.textPrimary} 0%, ${theme.colors.textSecondary} 100%)`,
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-          }}>
-            NOIR
-          </h1>
-        </div>
+       
 
-        <p style={{ color: theme.colors.accent, fontSize: '12px', letterSpacing: '5px', margin: '0 0 1.5rem', fontWeight: 300 }}>
-          VISTE EL SILENCIO
-        </p>
-        <p style={{ color: theme.colors.textSecondary, fontSize: '16px', maxWidth: '500px', lineHeight: 1.9, margin: '0 0 3rem' }}>
-          Moda minimalista para quienes buscan elegancia sin esfuerzo. Prendas atemporales diseñadas para durar.
-        </p>
-
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
           <button onClick={handleIrProductos} style={{
-            background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
-            color: '#fff', border: 'none', borderRadius: theme.radius.lg,
-            padding: '14px 36px', fontSize: '13px', fontWeight: 600, cursor: 'pointer',
-            letterSpacing: '2px', boxShadow: theme.shadow.accent, transition: 'opacity 0.2s',
+            background: 'transparent',
+            color: '#fff',
+            border: '2px solid #fff',
+            borderRadius: theme.radius.lg,
+            padding: '12px 32px',
+            fontSize: '13px',
+            fontWeight: 600,
+            cursor: 'pointer',
+            letterSpacing: '2px',
+            transition: 'all 0.3s',
           }}
-            onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
-            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'
+              e.currentTarget.style.transform = 'translateY(-2px)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = 'transparent'
+              e.currentTarget.style.transform = 'translateY(0)'
+            }}
           >
             EXPLORAR COLECCIÓN
           </button>
           <button onClick={() => document.getElementById('acerca')?.scrollIntoView({ behavior: 'smooth' })} style={{
-            background: 'none', color: theme.colors.textSecondary,
-            border: `1px solid ${theme.colors.border}`, borderRadius: theme.radius.lg,
-            padding: '14px 36px', fontSize: '13px', cursor: 'pointer',
-            letterSpacing: '2px', transition: 'all 0.2s',
+            background: 'rgba(255, 255, 255, 0.12)',
+            color: '#fff',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            borderRadius: theme.radius.lg,
+            padding: '12px 32px',
+            fontSize: '13px',
+            fontWeight: 600,
+            cursor: 'pointer',
+            letterSpacing: '2px',
+            transition: 'all 0.3s',
           }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = theme.colors.borderHover; e.currentTarget.style.color = theme.colors.textPrimary }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = theme.colors.border; e.currentTarget.style.color = theme.colors.textSecondary }}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'
+              e.currentTarget.style.borderColor = '#fff'
+              e.currentTarget.style.transform = 'translateY(-2px)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)'
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)'
+              e.currentTarget.style.transform = 'translateY(0)'
+            }}
           >
             SABER MÁS
           </button>
         </div>
 
-        <div style={{ marginTop: '5rem', color: theme.colors.textMuted }}>
+        <div style={{ marginTop: '5rem', color: theme.colors.textMuted, position: 'relative', zIndex: 1 }}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
@@ -212,45 +232,57 @@ const Home = () => {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '1.25rem' }}>
-          {categorias.map(cat => (
-            <div
-              key={cat.id}
-              onClick={() => handleIrCategoria(cat.id)}
-              style={{
-                background: theme.colors.bgCard,
-                border: `1px solid ${theme.colors.border}`,
-                borderRadius: theme.radius.xl,
-                padding: '2.5rem 2rem',
-                cursor: 'pointer', textAlign: 'center',
-                transition: 'all 0.3s',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = theme.colors.borderAccent
-                e.currentTarget.style.background = theme.colors.bgCardHover
-                e.currentTarget.style.transform = 'translateY(-4px)'
-                e.currentTarget.style.boxShadow = theme.shadow.accent
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = theme.colors.border
-                e.currentTarget.style.background = theme.colors.bgCard
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = 'none'
-              }}
-            >
-              <div style={{ fontSize: '48px', marginBottom: '1.25rem' }}>
-                {iconosPorNombre[cat.nombre] ?? '🛍️'}
+          {categorias.map(cat => {
+            const imageUrl = categoriaImagenes[cat.nombre]
+            return (
+              <div
+                key={cat.id}
+                onClick={() => handleIrCategoria(cat.id)}
+                style={{
+                  background: imageUrl
+                    ? `url(${imageUrl}) center/cover no-repeat`
+                    : theme.colors.bgCard,
+                  border: `1px solid ${theme.colors.border}`,
+                  borderRadius: theme.radius.xl,
+                  padding: '2.5rem 2rem',
+                  cursor: 'pointer', textAlign: 'center',
+                  transition: 'all 0.3s',
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = theme.colors.borderAccent
+                  e.currentTarget.style.transform = 'translateY(-4px)'
+                  e.currentTarget.style.boxShadow = theme.shadow.accent
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = theme.colors.border
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = 'none'
+                }}
+              >
+                {imageUrl && (
+                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(0, 0, 0, 0.24)' }} />
+                )}
+                <div style={{ position: 'relative', zIndex: 1, minHeight: '220px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+                  {!imageUrl && (
+                    <div style={{ fontSize: '48px', marginBottom: '1.25rem' }}>
+                      {iconosPorNombre[cat.nombre] ?? '🛍️'}
+                    </div>
+                  )}
+                  <h3 style={{ color: imageUrl ? '#fff' : theme.colors.textPrimary, fontSize: '14px', fontWeight: 600, margin: '0 0 6px', letterSpacing: '3px' }}>
+                    {cat.nombre.toUpperCase()}
+                  </h3>
+                  <p style={{ color: imageUrl ? 'rgba(255,255,255,0.85)' : theme.colors.textSecondary, fontSize: '12px', margin: '0 0 1.25rem' }}>
+                    {cat.productos.length} productos
+                  </p>
+                  <span style={{ color: imageUrl ? '#fff' : theme.colors.accent, fontSize: '12px', letterSpacing: '1px', fontWeight: 500 }}>
+                    Ver colección →
+                  </span>
+                </div>
               </div>
-              <h3 style={{ color: theme.colors.textPrimary, fontSize: '14px', fontWeight: 600, margin: '0 0 6px', letterSpacing: '3px' }}>
-                {cat.nombre.toUpperCase()}
-              </h3>
-              <p style={{ color: theme.colors.textSecondary, fontSize: '12px', margin: '0 0 1.25rem' }}>
-                {cat.productos.length} productos
-              </p>
-              <span style={{ color: theme.colors.accent, fontSize: '12px', letterSpacing: '1px', fontWeight: 500 }}>
-                Ver colección →
-              </span>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         <div style={{ textAlign: 'center', marginTop: '3rem' }}>
@@ -284,13 +316,25 @@ const Home = () => {
             </p>
           </div>
           <button onClick={handleIrProductos} style={{
-            background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
-            color: '#fff', border: 'none', borderRadius: theme.radius.lg,
-            padding: '14px 36px', fontSize: '12px', fontWeight: 600, cursor: 'pointer',
-            letterSpacing: '3px', boxShadow: theme.shadow.accent, transition: 'opacity 0.2s',
+            background: 'transparent',
+            color: theme.colors.accent,
+            border: `2px solid ${theme.colors.accent}`,
+            borderRadius: theme.radius.lg,
+            padding: '12px 32px',
+            fontSize: '12px',
+            fontWeight: 600,
+            cursor: 'pointer',
+            letterSpacing: '3px',
+            transition: 'all 0.3s',
           }}
-            onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
-            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = theme.colors.accentBg
+              e.currentTarget.style.transform = 'translateY(-2px)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = 'transparent'
+              e.currentTarget.style.transform = 'translateY(0)'
+            }}
           >
             DESCUBRIR LA COLECCIÓN
           </button>
@@ -300,9 +344,7 @@ const Home = () => {
       {/* Footer */}
       <footer style={{ borderTop: `1px solid ${theme.colors.border}`, padding: '2.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={theme.colors.accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.38-1 1.73V7l8 5v1H3v-1l8-5V5.73A2 2 0 0 1 10 4a2 2 0 0 1 2-2z"/>
-          </svg>
+          <img src={new URL('../assets/Logo_noir.png', import.meta.url).href} alt="NOIR logo" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
           <span style={{ color: theme.colors.textMuted, fontSize: '13px', letterSpacing: '4px' }}>NOIR</span>
         </div>
         <p style={{ color: theme.colors.textMuted, fontSize: '11px', letterSpacing: '2px', margin: 0 }}>© 2026 NOIR — TODOS LOS DERECHOS RESERVADOS</p>

@@ -49,28 +49,21 @@ const NavBarPublica = () => {
         }}
         className="hover-scale"
       >
-        <div style={{
-          width: '32px', height: '32px',
-          background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
-          borderRadius: theme.radius.md,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: '0 0 20px rgba(102, 126, 234, 0.2)',
-          transition: 'all 300ms ease',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.boxShadow = '0 0 40px rgba(102, 126, 234, 0.4)'
-          e.currentTarget.style.transform = 'rotate(-5deg) scale(1.1)'
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.boxShadow = '0 0 20px rgba(102, 126, 234, 0.2)'
-          e.currentTarget.style.transform = 'rotate(0) scale(1)'
-        }}
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-            stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.38-1 1.73V7l8 5v1H3v-1l8-5V5.73A2 2 0 0 1 10 4a2 2 0 0 1 2-2z"/>
-          </svg>
-        </div>
+        <img 
+          src={new URL('../assets/Logo_noir.png', import.meta.url).href}
+          alt="NOIR Logo"
+          style={{
+            height: '36px',
+            objectFit: 'contain',
+            transition: 'all 300ms ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'rotate(-5deg) scale(1.1)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'rotate(0) scale(1)'
+          }}
+        />
         <span style={{
           color: '#f1f5f9',
           fontSize: '18px',
