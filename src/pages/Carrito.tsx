@@ -19,7 +19,7 @@ const Carrito = () => {
           <p style={{ color: theme.colors.accent, fontSize: '11px', letterSpacing: '4px', margin: '0 0 6px' }}>
             COMPRA
           </p>
-          <h1 style={{ color: theme.colors.textPrimary, fontSize: '28px', fontWeight: 700, margin: 0, letterSpacing: '2px' }}>
+          <h1 style={{ color: theme.colors.textSecondary, fontSize: '28px', fontWeight: 700, margin: 0, letterSpacing: '2px' }}>
             MI CARRITO
           </h1>
         </div>
@@ -30,7 +30,7 @@ const Carrito = () => {
           <div style={{
             textAlign: 'center', marginTop: '5rem',
             padding: '4rem 2rem',
-            background: theme.colors.bgCard,
+            background: theme.colors.bg,
             border: `1px solid ${theme.colors.border}`,
             borderRadius: theme.radius.xl,
           }}>
@@ -58,7 +58,7 @@ const Carrito = () => {
             <button
               onClick={() => navigate('/categorias')}
               style={{
-                background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
+                background: `linear-gradient(135deg, ${theme.colors.bg}, ${theme.colors.accentDark})`,
                 color: '#fff', border: 'none',
                 borderRadius: theme.radius.lg,
                 padding: '12px 28px',
@@ -79,7 +79,7 @@ const Carrito = () => {
             <div style={{ flex: 1, minWidth: '320px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {carrito.items.map(item => (
                 <div key={item.id} style={{
-                  background: theme.colors.bgCard,
+                  background: theme.colors.bg,
                   border: `1px solid ${theme.colors.border}`,
                   borderRadius: theme.radius.xl,
                   padding: '1.25rem',
@@ -113,13 +113,13 @@ const Carrito = () => {
 
                   {/* Info */}
                   <div style={{ flex: 1 }}>
-                    <p style={{ color: theme.colors.textPrimary, fontSize: '14px', fontWeight: 600, margin: '0 0 4px' }}>
+                    <p style={{ color: theme.colors.textSecondary, fontSize: '14px', fontWeight: 600, margin: '0 0 4px' }}>
                       {item.producto.nombre}
                     </p>
                     <p style={{ color: theme.colors.textMuted, fontSize: '12px', margin: '0 0 10px' }}>
                       {item.producto.color} · {item.producto.talla}
                     </p>
-                    <p style={{ color: theme.colors.accent, fontSize: '15px', fontWeight: 700, margin: 0 }}>
+                    <p style={{ color: theme.colors.textSecondary, fontSize: '15px', fontWeight: 700, margin: 0 }}>
                       {(item.producto.precio * item.cantidad).toFixed(2)} €
                     </p>
                   </div>
@@ -130,7 +130,7 @@ const Carrito = () => {
                       onClick={() => actualizarCantidad(item.producto.id, item.cantidad - 1)}
                       style={{
                         width: '30px', height: '30px',
-                        background: theme.colors.bg,
+                        background: theme.colors.bgCard,
                         border: `1px solid ${theme.colors.border}`,
                         borderRadius: theme.radius.md,
                         color: theme.colors.textPrimary,
@@ -143,14 +143,14 @@ const Carrito = () => {
                     >
                       −
                     </button>
-                    <span style={{ color: theme.colors.textPrimary, fontSize: '14px', fontWeight: 600, minWidth: '20px', textAlign: 'center' }}>
+                    <span style={{ color: theme.colors.bgCard, fontSize: '14px', fontWeight: 600, minWidth: '20px', textAlign: 'center' }}>
                       {item.cantidad}
                     </span>
                     <button
                       onClick={() => actualizarCantidad(item.producto.id, item.cantidad + 1)}
                       style={{
                         width: '30px', height: '30px',
-                        background: theme.colors.bg,
+                        background: theme.colors.bgCard,
                         border: `1px solid ${theme.colors.border}`,
                         borderRadius: theme.radius.md,
                         color: theme.colors.textPrimary,
@@ -193,13 +193,13 @@ const Carrito = () => {
             {/* Resumen */}
             <div style={{
               width: '280px', flexShrink: 0,
-              background: theme.colors.bgCard,
+              background: theme.colors.bg,
               border: `1px solid ${theme.colors.border}`,
               borderRadius: theme.radius.xl,
               padding: '1.5rem',
               position: 'sticky', top: '80px',
             }}>
-              <h2 style={{ color: theme.colors.textPrimary, fontSize: '16px', fontWeight: 600, margin: '0 0 1.25rem', letterSpacing: '1px' }}>
+              <h2 style={{ color: theme.colors.textSecondary, fontSize: '16px', fontWeight: 600, margin: '0 0 1.25rem', letterSpacing: '1px' }}>
                 RESUMEN
               </h2>
 
@@ -224,8 +224,8 @@ const Carrito = () => {
                 borderTop: `1px solid ${theme.colors.border}`,
                 marginTop: '0.75rem',
               }}>
-                <span style={{ color: theme.colors.textPrimary, fontSize: '15px', fontWeight: 600 }}>Total</span>
-                <span style={{ color: theme.colors.accent, fontSize: '22px', fontWeight: 800 }}>
+                <span style={{ color: theme.colors.textSecondary, fontSize: '15px', fontWeight: 600 }}>Total</span>
+                <span style={{ color: theme.colors.textSecondary, fontSize: '22px', fontWeight: 800 }}>
                   {total.toFixed(2)} €
                 </span>
               </div>
@@ -234,7 +234,7 @@ const Carrito = () => {
                 onClick={() => navigate('/pago')}
                 style={{
                   width: '100%',
-                  background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
+                  background: `linear-gradient(135deg, ${theme.colors.bg}, ${theme.colors.accentDark})`,
                   color: '#fff', border: 'none',
                   borderRadius: theme.radius.lg,
                   padding: '13px',
@@ -264,7 +264,7 @@ const Carrito = () => {
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.borderColor = theme.colors.borderHover
-                  e.currentTarget.style.color = theme.colors.textPrimary
+                  e.currentTarget.style.color = theme.colors.bgCard
                 }}
                 onMouseLeave={e => {
                   e.currentTarget.style.borderColor = theme.colors.border
