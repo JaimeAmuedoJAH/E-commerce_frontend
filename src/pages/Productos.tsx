@@ -14,13 +14,29 @@ const Productos = () => {
   const [filtroTalla, setFiltroTalla] = useState('')
   const [filtroColor, setFiltroColor] = useState('')
   const [soloConStock, setSoloConStock] = useState(false)
+  const [page, setPage] = useState(0)
+  const [totalPages, setTotalPages] = useState(0)
+  const size = 8
 
   useEffect(() => {
-    api.get<Producto[]>(`/productos/categoria/${categoriaId}`)
-      .then(res => setProductos(res.data))
+      setLoading(true)
+      api.get(`/productos/categoria/${categoriaId}`, {
+          params: {
+              nombre: busqueda,
+              talla: filtroTalla,
+              color: filtroColor,
+              soloConStock,
+              page,
+              size,
+          }
+      })
+      .then(res => {
+          setProductos(res.data.content)
+          setTotalPages(res.data.page.totalPages)
+      })
       .catch(() => setError('Error al cargar los productos'))
       .finally(() => setLoading(false))
-  }, [categoriaId])
+  }, [categoriaId, busqueda, filtroTalla, filtroColor, soloConStock, page])
 
   const tallas = [...new Set(productos.map(p => p.talla).filter(Boolean))]
   const colores = [...new Set(productos.map(p => p.color).filter(Boolean))]
@@ -177,6 +193,7 @@ const Productos = () => {
           <p style={{ color: theme.colors.textMuted, fontSize: '14px' }}>No se encontraron productos.</p>
         )}
 
+        {/* Grid de productos */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
@@ -259,6 +276,50 @@ const Productos = () => {
             </div>
           ))}
         </div>
+
+        {/* Paginación */}
+        {totalPages > 1 && (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', marginTop: '2rem' }}>
+            <button
+              onClick={() => setPage(p => p - 1)}
+              disabled={page === 0}
+              style={{
+                background: theme.colors.bg,
+                border: `1px solid ${page === 0 ? theme.colors.border : theme.colors.borderAccent}`,
+                borderRadius: theme.radius.md,
+                padding: '8px 16px',
+                color: page === 0 ? theme.colors.textMuted : theme.colors.textSecondary,
+                cursor: page === 0 ? 'not-allowed' : 'pointer',
+                fontSize: '13px',
+                transition: 'all 0.2s',
+              }}
+            >
+              ← Anterior
+            </button>
+
+            <span style={{ color: theme.colors.textMuted, fontSize: '13px' }}>
+              Página {page + 1} de {totalPages}
+            </span>
+
+            <button
+              onClick={() => setPage(p => p + 1)}
+              disabled={page === totalPages - 1}
+              style={{
+                background: theme.colors.bg,
+                border: `1px solid ${page === totalPages - 1 ? theme.colors.border : theme.colors.borderAccent}`,
+                borderRadius: theme.radius.md,
+                padding: '8px 16px',
+                color: page === totalPages - 1 ? theme.colors.textMuted : theme.colors.textSecondary,
+                cursor: page === totalPages - 1 ? 'not-allowed' : 'pointer',
+                fontSize: '13px',
+                transition: 'all 0.2s',
+              }}
+            >
+              Siguiente →
+            </button>
+          </div>
+        )}
+
       </div>
     </div>
   )
