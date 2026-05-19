@@ -45,11 +45,11 @@ const Login = () => {
 
   const inputStyle = {
     width: '100%', boxSizing: 'border-box' as const,
-    background: theme.colors.bgInput,
+    background: theme.colors.bg,
     border: `1px solid ${theme.colors.border}`,
     borderRadius: theme.radius.md,
     padding: '10px 14px',
-    fontSize: '13px', color: theme.colors.textPrimary, outline: 'none',
+    fontSize: '13px', color: theme.colors.bgCard, outline: 'none',
     transition: 'border-color 0.2s',
   }
 
@@ -200,7 +200,7 @@ const Login = () => {
                   position: 'absolute', right: '10px', top: '50%',
                   transform: 'translateY(-50%)',
                   background: 'none', border: 'none', cursor: 'pointer',
-                  padding: 0, color: theme.colors.textMuted,
+                  padding: 0, color: theme.colors.bgCard,
                 }}
               >
                 {showPassword ? (
@@ -223,7 +223,7 @@ const Login = () => {
             type="submit" disabled={loading}
             style={{
               width: '100%',
-              background: `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`,
+              background: `linear-gradient(135deg, ${theme.colors.bg}, ${theme.colors.accentDark})`,
               color: '#fff', border: 'none',
               borderRadius: theme.radius.md,
               padding: '11px', fontSize: '13px', fontWeight: 600,

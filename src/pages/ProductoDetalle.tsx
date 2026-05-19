@@ -42,7 +42,7 @@ const ProductoDetalle = () => {
         <button
           onClick={() => navigate(-1)}
           style={{
-            background: theme.colors.bgCard,
+            background: theme.colors.bg,
             border: `1px solid ${theme.colors.border}`,
             borderRadius: theme.radius.md,
             padding: '8px 14px',
@@ -80,7 +80,7 @@ const ProductoDetalle = () => {
             {/* Imagen */}
             <div style={{
               width: '380px', height: '420px', flexShrink: 0,
-              background: theme.colors.bgCard,
+              background: theme.colors.bg,
               border: `1px solid ${theme.colors.border}`,
               borderRadius: theme.radius.xl,
               overflow: 'hidden',
@@ -114,7 +114,7 @@ const ProductoDetalle = () => {
               {/* Badges */}
               <div style={{ display: 'flex', gap: '8px', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
                 <span style={{
-                  background: theme.colors.bgCard,
+                  background: theme.colors.bg,
                   border: `1px solid ${theme.colors.border}`,
                   borderRadius: theme.radius.full,
                   padding: '4px 12px',
@@ -123,7 +123,7 @@ const ProductoDetalle = () => {
                   Talla: {producto.talla}
                 </span>
                 <span style={{
-                  background: theme.colors.bgCard,
+                  background: theme.colors.bg,
                   border: `1px solid ${theme.colors.border}`,
                   borderRadius: theme.radius.full,
                   padding: '4px 12px',
@@ -152,16 +152,16 @@ const ProductoDetalle = () => {
 
               {/* Precio */}
               <div style={{
-                background: theme.colors.bgCard,
+                background: theme.colors.bg,
                 border: `1px solid ${theme.colors.border}`,
                 borderRadius: theme.radius.lg,
                 padding: '1.25rem',
                 marginBottom: '1.5rem',
               }}>
-                <p style={{ color: theme.colors.textMuted, fontSize: '12px', margin: '0 0 4px', letterSpacing: '1px' }}>
+                <p style={{ color: theme.colors.bgCard, fontSize: '12px', margin: '0 0 4px', letterSpacing: '1px' }}>
                   PRECIO
                 </p>
-                <span style={{ color: theme.colors.accent, fontSize: '32px', fontWeight: 800 }}>
+                <span style={{ color: theme.colors.textSecondary, fontSize: '32px', fontWeight: 800 }}>
                   {producto.precio.toFixed(2)} €
                 </span>
               </div>
@@ -185,7 +185,7 @@ const ProductoDetalle = () => {
                     >
                       −
                     </button>
-                    <span style={{ color: theme.colors.textPrimary, fontSize: '15px', fontWeight: 600, minWidth: '24px', textAlign: 'center' }}>
+                    <span style={{ color: theme.colors.textSecondary, fontSize: '15px', fontWeight: 600, minWidth: '24px', textAlign: 'center' }}>
                       {cantidad}
                     </span>
                     <button

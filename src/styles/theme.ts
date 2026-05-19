@@ -1,10 +1,10 @@
 export const theme = {
   colors: {
     // Fondos - Degradados modernos
-    bg: '#ffffff',
+    bg: '#0f1419',
     bgCard: '#f8fafc',
     bgCardHover: '#f1f5f9',
-    bgInput: '#ffffff',
+    bgInput: '#0f1419',
     bgGradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     bgGradient2: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
 

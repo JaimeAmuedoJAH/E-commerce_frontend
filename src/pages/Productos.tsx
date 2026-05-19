@@ -34,7 +34,7 @@ const Productos = () => {
   })
 
   const selectStyle = {
-    background: theme.colors.bgCard,
+    background: theme.colors.bg,
     border: `1px solid ${theme.colors.border}`,
     borderRadius: theme.radius.md,
     padding: '9px 14px',
@@ -52,7 +52,7 @@ const Productos = () => {
           <button
             onClick={() => navigate('/categorias')}
             style={{
-              background: theme.colors.bgCard,
+              background: theme.colors.bg,
               border: `1px solid ${theme.colors.border}`,
               borderRadius: theme.radius.md,
               padding: '8px 14px',
@@ -85,7 +85,7 @@ const Productos = () => {
           display: 'flex', flexWrap: 'wrap', gap: '0.75rem',
           marginBottom: '2rem',
           padding: '1.25rem',
-          background: theme.colors.bgCard,
+          background: theme.colors.bg,
           border: `1px solid ${theme.colors.border}`,
           borderRadius: theme.radius.lg,
         }}>
@@ -148,7 +148,7 @@ const Productos = () => {
             <button
               onClick={() => { setBusqueda(''); setFiltroTalla(''); setFiltroColor(''); setSoloConStock(false) }}
               style={{
-                background: 'none',
+                background: theme.colors.bg,
                 border: `1px solid ${theme.colors.errorBorder}`,
                 borderRadius: theme.radius.md,
                 padding: '9px 14px',
@@ -245,7 +245,7 @@ const Productos = () => {
                   {producto.color} · {producto.talla}
                 </p>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: theme.colors.accent, fontSize: '16px', fontWeight: 700 }}>
+                  <span style={{ color: theme.colors.textSecondary, fontSize: '16px', fontWeight: 700 }}>
                     {producto.precio.toFixed(2)} €
                   </span>
                   <span style={{

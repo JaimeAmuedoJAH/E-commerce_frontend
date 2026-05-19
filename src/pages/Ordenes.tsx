@@ -81,7 +81,7 @@ const Ordenes = () => {
           <p style={{ color: theme.colors.accent, fontSize: '11px', letterSpacing: '4px', margin: '0 0 6px' }}>
             CUENTA
           </p>
-          <h1 style={{ color: theme.colors.textPrimary, fontSize: '28px', fontWeight: 700, margin: 0, letterSpacing: '2px' }}>
+          <h1 style={{ color: theme.colors.textSecondary, fontSize: '28px', fontWeight: 700, margin: 0, letterSpacing: '2px' }}>
             MIS PEDIDOS
           </h1>
         </div>
@@ -91,7 +91,7 @@ const Ordenes = () => {
         {error && (
           <div style={{
             background: theme.colors.errorBg,
-            border: `1px solid ${theme.colors.errorBorder}`,
+            border: `1px solid ${theme.colors.bg}`,
             borderRadius: theme.radius.md,
             padding: '12px 16px',
             fontSize: '13px', color: theme.colors.error,
@@ -171,7 +171,7 @@ const Ordenes = () => {
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <span style={{
-                      color: theme.colors.textMuted, fontSize: '13px', fontWeight: 500,
+                      color: theme.colors.bg, fontSize: '13px', fontWeight: 500,
                     }}>
                       Pedido #{orden.id}
                     </span>
@@ -187,10 +187,10 @@ const Ordenes = () => {
                     </span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                    <span style={{ color: theme.colors.textMuted, fontSize: '12px' }}>
+                    <span style={{ color: theme.colors.bg, fontSize: '12px' }}>
                       {formatFecha(orden.fechaCreacion)}
                     </span>
-                    <span style={{ color: theme.colors.accent, fontSize: '16px', fontWeight: 700 }}>
+                    <span style={{ color: theme.colors.bg, fontSize: '16px', fontWeight: 700 }}>
                       {orden.total.toFixed(2)} €
                     </span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none"

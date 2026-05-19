@@ -192,7 +192,7 @@ const Home = () => {
         padding: '4rem 2rem',
         borderTop: `1px solid ${theme.colors.border}`,
         borderBottom: `1px solid ${theme.colors.border}`,
-        background: theme.colors.bgCard,
+        background: theme.colors.bg,
       }}>
         <div style={{
           maxWidth: '1100px', margin: '0 auto',
@@ -301,7 +301,7 @@ const Home = () => {
       </section>
 
       {/* Acerca de */}
-      <section id="acerca" style={{ padding: '6rem 2rem', background: theme.colors.bgCard, borderTop: `1px solid ${theme.colors.border}` }}>
+      <section id="acerca" style={{ padding: '6rem 2rem', background: theme.colors.bg, borderTop: `1px solid ${theme.colors.border}` }}>
         <div style={{ maxWidth: '680px', margin: '0 auto', textAlign: 'center' }}>
           <p style={{ color: theme.colors.accent, fontSize: '11px', letterSpacing: '4px', marginBottom: '0.75rem' }}>NUESTRA HISTORIA</p>
           <h2 style={{ color: theme.colors.textPrimary, fontSize: '32px', fontWeight: 700, margin: '0 0 2rem', letterSpacing: '3px' }}>
@@ -342,7 +342,7 @@ const Home = () => {
       </section>
 
       {/* Footer */}
-      <footer style={{ borderTop: `1px solid ${theme.colors.border}`, padding: '2.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+      <footer style={{ borderTop: `1px solid ${theme.colors.bg}`, padding: '2.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <img src={new URL('../assets/Logo_noir.png', import.meta.url).href} alt="NOIR logo" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
           <span style={{ color: theme.colors.textMuted, fontSize: '13px', letterSpacing: '4px' }}>NOIR</span>

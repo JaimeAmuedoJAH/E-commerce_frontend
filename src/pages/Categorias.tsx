@@ -44,7 +44,7 @@ const Categorias = () => {
           <p style={{ color: theme.colors.accent, fontSize: '11px', letterSpacing: '4px', margin: '0 0 6px' }}>
             TIENDA
           </p>
-          <h1 style={{ color: theme.colors.textPrimary, fontSize: '28px', fontWeight: 700, margin: '0 0 1.5rem', letterSpacing: '2px' }}>
+          <h1 style={{ color: theme.colors.textSecondary, fontSize: '28px', fontWeight: 700, margin: '0 0 1.5rem', letterSpacing: '2px' }}>
             CATEGORÍAS
           </h1>
 
@@ -62,7 +62,7 @@ const Categorias = () => {
               onChange={e => setBusqueda(e.target.value)}
               style={{
                 width: '100%', boxSizing: 'border-box' as const,
-                background: theme.colors.bgCard,
+                background: theme.colors.bg,
                 border: `1px solid ${theme.colors.border}`,
                 borderRadius: theme.radius.md,
                 padding: '10px 14px 10px 36px',
