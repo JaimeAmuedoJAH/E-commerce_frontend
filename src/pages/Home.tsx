@@ -223,7 +223,7 @@ const Home = () => {
       <section id="productos" style={{ padding: '6rem 2rem', maxWidth: '1100px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <p style={{ color: theme.colors.accent, fontSize: '11px', letterSpacing: '4px', marginBottom: '0.75rem' }}>COLECCIONES</p>
-          <h2 style={{ color: theme.colors.textPrimary, fontSize: '32px', fontWeight: 700, margin: '0 0 1rem', letterSpacing: '3px' }}>
+          <h2 style={{ color: theme.colors.textSecondary, fontSize: '32px', fontWeight: 700, margin: '0 0 1rem', letterSpacing: '3px' }}>
             NUESTROS PRODUCTOS
           </h2>
           <p style={{ color: theme.colors.textSecondary, fontSize: '14px', maxWidth: '400px', margin: '0 auto' }}>
@@ -304,7 +304,7 @@ const Home = () => {
       <section id="acerca" style={{ padding: '6rem 2rem', background: theme.colors.bg, borderTop: `1px solid ${theme.colors.border}` }}>
         <div style={{ maxWidth: '680px', margin: '0 auto', textAlign: 'center' }}>
           <p style={{ color: theme.colors.accent, fontSize: '11px', letterSpacing: '4px', marginBottom: '0.75rem' }}>NUESTRA HISTORIA</p>
-          <h2 style={{ color: theme.colors.textPrimary, fontSize: '32px', fontWeight: 700, margin: '0 0 2rem', letterSpacing: '3px' }}>
+          <h2 style={{ color: theme.colors.textSecondary, fontSize: '32px', fontWeight: 700, margin: '0 0 2rem', letterSpacing: '3px' }}>
             ACERCA DE NOIR
           </h2>
           <div style={{ background: theme.colors.bg, border: `1px solid ${theme.colors.border}`, borderRadius: theme.radius.xl, padding: '2.5rem', marginBottom: '2rem' }}>
