@@ -215,7 +215,7 @@ const ProductoDetalle = () => {
                   background: agregado
                     ? theme.colors.accentBg
                     : producto.stock > 0
-                      ? `linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accentDark})`
+                      ? `linear-gradient(135deg, ${theme.colors.bg}, ${theme.colors.accentDark})`
                       : theme.colors.bgCard,
                   color: agregado ? theme.colors.accent : producto.stock > 0 ? '#fff' : theme.colors.textMuted,
                   border: `1px solid ${agregado ? theme.colors.borderAccent : producto.stock > 0 ? 'transparent' : theme.colors.border}`,

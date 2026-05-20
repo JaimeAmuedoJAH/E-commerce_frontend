@@ -7,7 +7,7 @@ import { theme } from '../styles/theme'
 interface LoginResponseDTO {
   token: string
   usuario: {
-    id: number
+    publicId: string
     nombre: string
     email: string
     rol: string

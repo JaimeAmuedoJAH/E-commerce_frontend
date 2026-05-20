@@ -25,14 +25,14 @@ export interface CarritoItem {
 
 export interface Carrito {
     id: number
-    clienteId: number
+    clientePublicId: string  // era: clienteId: number
     items: CarritoItem[]
     totalItems: number
 }
 
 export interface Tarjeta {
     id: number
-    clienteId: number
+    clientePublicId: string
     numeroTarjeta: string
     titular: string
     fechaExpiracion: string
@@ -41,7 +41,7 @@ export interface Tarjeta {
 
 export interface PagoRequest {
     carritoId: number
-    clienteId: number
+    clientePublicId: string
     numeroTarjeta: string
     fechaExpiracion: string
     cvv: string
@@ -54,5 +54,5 @@ export interface PagoResponse {
     mensaje: string
     codigoTransaccion: string | null
     carritoId: number
-    clienteId: number
+    clientePublicId: string
 }    

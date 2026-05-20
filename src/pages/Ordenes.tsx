@@ -14,7 +14,7 @@ interface OrdenItem {
 
 interface Orden {
   id: number
-  clienteId: number
+  clientePublicId: string
   clienteNombre: string
   direccion: string
   total: number
@@ -43,7 +43,7 @@ const Ordenes = () => {
 
   useEffect(() => {
     if (!user) return
-    api.get<Orden[]>(`/ordenes/cliente/${user.id}`)
+    api.get<Orden[]>(`/ordenes/cliente/${user.publicId}`)
       .then(res => setOrdenes(res.data))
       .catch(() => setError('Error al cargar los pedidos'))
       .finally(() => setLoading(false))
