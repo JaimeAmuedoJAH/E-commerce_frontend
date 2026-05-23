@@ -6,6 +6,7 @@ import { theme } from '../styles/theme'
 
 interface LoginResponseDTO {
   token: string
+  refreshToken: string
   usuario: {
     publicId: string
     nombre: string
@@ -30,7 +31,7 @@ const Login = () => {
     setLoading(true)
     try {
       const { data } = await api.post<LoginResponseDTO>('/usuarios/login', { email, password })
-      login(data.token, data.usuario)
+      login(data.token, data.refreshToken, data.usuario)
       navigate('/')
     } catch (err: any) {
       if (err.response?.status === 401 || err.response?.status === 400) {
@@ -49,7 +50,7 @@ const Login = () => {
     border: `1px solid ${theme.colors.border}`,
     borderRadius: theme.radius.md,
     padding: '10px 14px',
-    fontSize: '13px', color: theme.colors.bgCard, outline: 'none',
+    fontSize: '13px', color: theme.colors.textSecondary, outline: 'none',
     transition: 'border-color 0.2s',
   }
 

@@ -26,7 +26,7 @@ export const CarritoProvider = ({ children}: { children: ReactNode }) => {
         return
         }
         setLoading(true)
-        api.get<Carrito[]>(`/carritos/cliente/${user.id}`)
+        api.get<Carrito[]>(`/carritos/cliente/${user.publicId}`)
         .then(res => {
             if (res.data.length > 0) {
             setCarrito(res.data[0])
@@ -53,14 +53,14 @@ export const CarritoProvider = ({ children}: { children: ReactNode }) => {
                 { productoId, cantidad }]
 
             const res = await api.put<Carrito>(`/carritos/update/${carrito.id}`, {
-                clienteId: user.id,
+                clientePublicId: user.publicId,
                 items: nuevosItems,
             })
             setCarrito(res.data)
         } else {
             //crear nuevo carrito
             const res = await api.post<Carrito>('/carritos/add', {
-                clienteId: user.id,
+                clientePublicId: user.publicId,
                 items: [{ productoId, cantidad }],
             })
             setCarrito(res.data)
@@ -84,7 +84,7 @@ export const CarritoProvider = ({ children}: { children: ReactNode }) => {
       }
 
       const res = await api.put<Carrito>(`/carritos/update/${carrito.id}`, {
-        clienteId: user.id,
+        clientePublicId: user.publicId,
         items: nuevosItems,
       })
       setCarrito(res.data)
@@ -105,7 +105,7 @@ export const CarritoProvider = ({ children}: { children: ReactNode }) => {
       }
 
       const res = await api.put<Carrito>(`/carritos/update/${carrito.id}`, {
-        clienteId: user.id,
+        clientePublicId: user.publicId,
         items: nuevosItems,
       })
       setCarrito(res.data)

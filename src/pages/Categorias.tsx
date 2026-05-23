@@ -155,7 +155,7 @@ const Categorias = () => {
                     {categoria.nombre}
                   </h2>
                   <p style={{ color: imageUrl ? 'rgba(255,255,255,0.85)' : theme.colors.textMuted, fontSize: '12px', margin: '0 0 1rem' }}>
-                    {categoria.productos.length} {categoria.productos.length === 1 ? 'producto' : 'productos'}
+                      Nueva colección
                   </p>
                   <span style={{ color: imageUrl ? '#fff' : theme.colors.accent, fontSize: '12px', fontWeight: 500 }}>
                     Ver productos →

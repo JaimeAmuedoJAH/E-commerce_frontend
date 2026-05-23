@@ -169,14 +169,50 @@ const NavBarPublica = () => {
               )}
             </button>
 
-            {/* Nombre */}
-            <span style={{
-              color: '#94a3b8',
-              fontSize: '13px',
-              padding: '0 4px',
-            }}>
-              {user?.nombre}
-            </span>
+            {/* Icono perfil */}
+            <button
+              onClick={() => navigate('/perfil')}
+              title={user?.nombre}
+              style={{
+                background: 'transparent',
+                border: `1px solid ${theme.colors.border}`,
+                borderRadius: theme.radius.full,
+                width: '34px',
+                height: '34px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                color: theme.colors.textMuted,
+                transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+                flexShrink: 0,
+                overflow: 'hidden',  // necesario para que la imagen respete el border-radius
+                padding: 0,
+              }}
+              className="hover-lift"
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = '#667eea'
+                e.currentTarget.style.boxShadow = '0 0 20px rgba(102, 126, 234, 0.2)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = theme.colors.border
+                e.currentTarget.style.boxShadow = 'none'
+              }}
+            >
+              {user?.imagenPerfil ? (
+                <img
+                  src={user.imagenPerfil}
+                  alt="avatar"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              ) : (
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              )}
+            </button>
 
             {/* Salir */}
             <button
