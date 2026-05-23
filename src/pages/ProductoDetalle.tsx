@@ -158,7 +158,7 @@ const ProductoDetalle = () => {
                 padding: '1.25rem',
                 marginBottom: '1.5rem',
               }}>
-                <p style={{ color: theme.colors.bgCard, fontSize: '12px', margin: '0 0 4px', letterSpacing: '1px' }}>
+                <p style={{ color: theme.colors.textPrimary, fontSize: '12px', margin: '0 0 4px', letterSpacing: '1px' }}>
                   PRECIO
                 </p>
                 <span style={{ color: theme.colors.textSecondary, fontSize: '32px', fontWeight: 800 }}>

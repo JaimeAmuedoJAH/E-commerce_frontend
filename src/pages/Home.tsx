@@ -274,7 +274,7 @@ const Home = () => {
                     {cat.nombre.toUpperCase()}
                   </h3>
                   <p style={{ color: imageUrl ? 'rgba(255,255,255,0.85)' : theme.colors.textSecondary, fontSize: '12px', margin: '0 0 1.25rem' }}>
-                    {cat.productos.length} productos
+                    Ver colección
                   </p>
                   <span style={{ color: imageUrl ? '#fff' : theme.colors.accent, fontSize: '12px', letterSpacing: '1px', fontWeight: 500 }}>
                     Ver colección →

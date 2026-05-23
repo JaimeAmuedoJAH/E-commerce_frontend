@@ -14,7 +14,7 @@ const Pago = () => {
   const [tarjetas, setTarjetas] = useState<Tarjeta[]>([])
   const [tarjetaSeleccionada, setTarjetaSeleccionada] = useState<Tarjeta | null>(null)
   const [cvv, setCvv] = useState('')
-  const [numeroTarjetaInput, setNumeroTarjetaInput] = useState('') // ✅ Añadido
+  const [numeroTarjetaInput, setNumeroTarjetaInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [mostrarFormNueva, setMostrarFormNueva] = useState(false)
@@ -28,7 +28,7 @@ const Pago = () => {
 
   useEffect(() => {
     if (!user) return
-    api.get<Tarjeta[]>(`/tarjetas/cliente/${user.id}`)
+    api.get<Tarjeta[]>(`/tarjetas/cliente/${user.publicId}`)
       .then(res => setTarjetas(res.data))
       .catch(() => setError('Error al cargar las tarjetas'))
   }, [user])
@@ -42,7 +42,7 @@ const Pago = () => {
     try {
       const { data } = await api.post<PagoResponse>('/pagos/procesar', {
         carritoId: carrito.id,
-        clienteId: user.id,
+        clientePublicId: user.publicId,
         numeroTarjeta: numeroTarjetaInput, // ✅ número real introducido por el usuario
         fechaExpiracion: tarjetaSeleccionada.fechaExpiracion,
         cvv,
@@ -66,7 +66,7 @@ const Pago = () => {
     setError(null)
     try {
       const { data } = await api.post<Tarjeta>('/tarjetas/add', {
-        clienteId: user.id,
+        clientePublicId: user.publicId,
         ...nuevaTarjeta,
         saldo: parseFloat(nuevaTarjeta.saldo),
       })

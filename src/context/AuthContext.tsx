@@ -1,16 +1,18 @@
 import { createContext, useContext, useEffect, useState, type ReactNode} from 'react'
+import api from '../api/axiosConfig'
 
-interface User  {
+interface User {
     publicId: string
     nombre: string
     email: string
-    rol:string
+    rol: string
+    imagenPerfil?: string
 }
 
 interface AuthContextType {
     user: User | null
     token: string | null
-    login: (token: string, user: User) => void
+    login: (token: string, refreshToken: string, user: User) => void
     logout: () => void
     isAuthenticated: boolean
 }
@@ -26,48 +28,56 @@ const isTokenExpired = (token: string): boolean => {
   }
 }
 
-
-
 export const AuthProvider = ({ children }: {children: ReactNode}) => {
-    const [token, setToken] = useState<string | null>(
-        localStorage.getItem('token')
-    )
-    const [user, setUser] = useState<User | null>(() => {
-        const stored = localStorage.getItem('user')
-        return stored ? JSON.parse(stored) : null
+    const [token, setToken] = useState<string | null>(() => {
+        const stored = localStorage.getItem('token')
+        if (!stored || stored === 'undefined' || stored === 'null') return null
+        return stored
     })
 
-    const login = (token: string, user: User) => {
+    const [user, setUser] = useState<User | null>(() => {
+        try {
+            const stored = localStorage.getItem('user')
+            if (!stored || stored === 'undefined' || stored === 'null') return null
+            return JSON.parse(stored)
+        } catch {
+            localStorage.removeItem('user')
+            return null
+        }
+    })
+
+    const login = (token: string, refreshToken: string, user: User) => {
         setToken(token)
         setUser(user)
         localStorage.setItem('token', token)
+        localStorage.setItem('refreshToken', refreshToken)
         localStorage.setItem('user', JSON.stringify(user))
     }
 
     const logout = () => {
+        api.post('/auth/logout').catch(() => {}) 
         setToken(null)
         setUser(null)
         localStorage.removeItem('token')
+        localStorage.removeItem('refreshToken')
         localStorage.removeItem('user')
     }
 
     useEffect(() => {
-    if (!token) return
+        if (!token) return
 
-    // Comprobar inmediatamente
-    if (isTokenExpired(token)) {
-        logout()
-        return
-    }
-
-    // Comprobar cada minuto
-    const interval = setInterval(() => {
         if (isTokenExpired(token)) {
-        logout()
+            logout()
+            return
         }
-    }, 60000)
 
-    return () => clearInterval(interval)
+        const interval = setInterval(() => {
+            if (isTokenExpired(token)) {
+                logout()
+            }
+        }, 60000)
+
+        return () => clearInterval(interval)
     }, [token])
 
     return (

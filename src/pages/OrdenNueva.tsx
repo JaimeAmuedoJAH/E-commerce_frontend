@@ -50,7 +50,7 @@ const OrdenNueva = () => {
       }))
 
       const { data } = await api.post<OrdenResponse>('/ordenes/add', {
-        clienteId: user.id,
+        clientePublicId: user.publicId,
         direccion,
         items,
         codigoTransaccion,

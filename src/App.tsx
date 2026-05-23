@@ -13,6 +13,7 @@ import OrdenConfirmacion from './pages/OrdenConfirmacion'
 import Ordenes from './pages/Ordenes'
 import Home from './pages/Home'
 import NavBarPublica from './components/NavBarPublica'
+import Perfil from './pages/Perfil'
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
               <Route path="ordenes/nueva" element={<OrdenNueva />} />
               <Route path="ordenes/confirmacion" element={<OrdenConfirmacion />} />
               <Route path="ordenes" element={<Ordenes />} />
+              <Route path="/perfil" element={<Perfil />} /> 
             </Routes>
           </>
         </ProtectedRoute>
