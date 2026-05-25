@@ -41,24 +41,29 @@ const Registro = () => {
   }
 
   const inputStyle = {
-    width: '100%', boxSizing: 'border-box' as const,
-    background: theme.colors.bgInput,
+    width: '100%',
+    boxSizing: 'border-box' as const,
+    background: theme.colors.bg,                  // igual que Login
     border: `1px solid ${theme.colors.border}`,
     borderRadius: theme.radius.md,
     padding: '10px 14px',
-    fontSize: '13px', color: theme.colors.textSecondary, outline: 'none',
+    fontSize: '13px',
+    color: theme.colors.textPrimary,              // igual que Login
+    outline: 'none',
     transition: 'border-color 0.2s',
   }
 
   const EyeIcon = () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
       <circle cx="12" cy="12" r="3"/>
     </svg>
   )
 
   const EyeOffIcon = () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
       <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
       <line x1="1" y1="1" x2="23" y2="23"/>
@@ -66,53 +71,59 @@ const Registro = () => {
   )
 
   const toggleBtnStyle = {
-    position: 'absolute' as const, right: '10px', top: '50%',
+    position: 'absolute' as const,
+    right: '10px',
+    top: '50%',
     transform: 'translateY(-50%)',
-    background: 'none', border: 'none', cursor: 'pointer',
-    padding: 0, color: theme.colors.textMuted,
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    padding: 0,
+    color: theme.colors.textMuted,               // igual que Login
   }
 
   return (
     <div style={{
-      minHeight: '100vh', width: '100%',
-      background: `linear-gradient(180deg, ${theme.colors.bg} 0%, ${theme.colors.bgCard} 65%)`,
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      position: 'relative', overflow: 'hidden',
+      minHeight: '100vh',
+      width: '100%',
+      background: theme.colors.bg,               // igual que Login (sin degradado)
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      position: 'relative',
+      overflow: 'hidden',
     }}>
 
+      {/* Blobs decorativos — mismas posiciones y colores que Login */}
       <div style={{
-        position: 'absolute', top: '12%', right: '10%',
-        width: '220px', height: '220px',
+        position: 'absolute', top: '10%', left: '10%',
+        width: '300px', height: '300px',
         borderRadius: '50%',
-        background: `rgba(81, 92, 242, 0.16)`,
-        filter: 'blur(55px)',
+        background: `rgba(109, 110, 143, 0.08)`,
+        filter: 'blur(80px)',
         pointerEvents: 'none',
       }} />
       <div style={{
-        position: 'absolute', bottom: '10%', left: '8%',
-        width: '200px', height: '200px',
+        position: 'absolute', bottom: '8%', right: '8%',
+        width: '250px', height: '250px',
         borderRadius: '50%',
-        background: `rgba(109, 110, 143, 0.10)`,
-        filter: 'blur(45px)',
+        background: `rgba(81, 92, 242, 0.1)`,
+        filter: 'blur(70px)',
         pointerEvents: 'none',
       }} />
 
+      {/* Tarjeta — sin overlay de imagen */}
       <div style={{
         background: theme.colors.bgCard,
         border: `1px solid ${theme.colors.border}`,
         borderRadius: theme.radius.xl,
-        padding: '1rem',
-        width: '100%', maxWidth: '360px',
+        padding: '2.5rem',                        // igual que Login
+        width: '100%',
+        maxWidth: '380px',                        // igual que Login
         boxShadow: theme.shadow.card,
         position: 'relative',
-        overflow: 'hidden',
+        zIndex: 1,
       }}>
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: `linear-gradient(rgba(255,255,255,0.86), rgba(255,255,255,0.86)), url(${new URL('../assets/Logo_noir.png', import.meta.url).href}) center/cover no-repeat`,
-          pointerEvents: 'none',
-        }} />
-        <div style={{ position: 'relative', zIndex: 1 }}>
 
         {/* Logo */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -170,7 +181,8 @@ const Registro = () => {
           }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
               <line x1="12" y1="16" x2="12.01" y2="16"/>
             </svg>
             {error}
@@ -180,7 +192,10 @@ const Registro = () => {
         <form onSubmit={handleSubmit}>
           {/* Nombre */}
           <div style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', fontSize: '12px', color: theme.colors.bgNav, marginBottom: '6px', fontWeight: 500 }}>
+            <label style={{
+              display: 'block', fontSize: '12px',
+              color: theme.colors.textSecondary, marginBottom: '6px', fontWeight: 500,
+            }}>
               Nombre
             </label>
             <input
@@ -195,7 +210,10 @@ const Registro = () => {
 
           {/* Email */}
           <div style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', fontSize: '12px', color: theme.colors.bgNav, marginBottom: '6px', fontWeight: 500 }}>
+            <label style={{
+              display: 'block', fontSize: '12px',
+              color: theme.colors.textSecondary, marginBottom: '6px', fontWeight: 500,
+            }}>
               Email
             </label>
             <input
@@ -210,7 +228,10 @@ const Registro = () => {
 
           {/* Contraseña */}
           <div style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', fontSize: '12px', color: theme.colors.bgNav, marginBottom: '6px', fontWeight: 500 }}>
+            <label style={{
+              display: 'block', fontSize: '12px',
+              color: theme.colors.textSecondary, marginBottom: '6px', fontWeight: 500,
+            }}>
               Contraseña
             </label>
             <div style={{ position: 'relative' }}>
@@ -231,7 +252,10 @@ const Registro = () => {
 
           {/* Confirmar contraseña */}
           <div style={{ marginBottom: '1.5rem' }}>
-            <label style={{ display: 'block', fontSize: '12px', color: theme.colors.bgNav, marginBottom: '6px', fontWeight: 500 }}>
+            <label style={{
+              display: 'block', fontSize: '12px',
+              color: theme.colors.textSecondary, marginBottom: '6px', fontWeight: 500,
+            }}>
               Confirmar contraseña
             </label>
             <div style={{ position: 'relative' }}>
@@ -258,7 +282,8 @@ const Registro = () => {
               color: '#fff', border: 'none',
               borderRadius: theme.radius.md,
               padding: '11px', fontSize: '13px', fontWeight: 600,
-              cursor: 'pointer', letterSpacing: '1px',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              letterSpacing: '1px',
               boxShadow: theme.shadow.accent,
               opacity: loading ? 0.6 : 1,
               transition: 'opacity 0.2s',
@@ -273,11 +298,10 @@ const Registro = () => {
           color: theme.colors.textMuted, marginTop: '1.25rem',
         }}>
           ¿Ya tienes cuenta?{' '}
-          <a href="/login" style={{ color: theme.colors.bgNav, textDecoration: 'none', fontWeight: 500 }}>
+          <a href="/login" style={{ color: theme.colors.accent, textDecoration: 'none', fontWeight: 500 }}>
             Inicia sesión
           </a>
         </p>
-        </div>
       </div>
     </div>
   )
