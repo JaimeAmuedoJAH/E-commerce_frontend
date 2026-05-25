@@ -245,7 +245,7 @@ const Login = () => {
           ¿No tienes cuenta?{' '}
           <a
             href="/registro"
-            style={{ color: theme.colors.accent, textDecoration: 'none', fontWeight: 500 }}
+            style={{ color: theme.colors.bgNav, textDecoration: 'none', fontWeight: 500 }}
           >
             Regístrate
           </a>

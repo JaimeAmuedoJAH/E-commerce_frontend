@@ -46,7 +46,7 @@ const Registro = () => {
     border: `1px solid ${theme.colors.border}`,
     borderRadius: theme.radius.md,
     padding: '10px 14px',
-    fontSize: '13px', color: theme.colors.bgCard, outline: 'none',
+    fontSize: '13px', color: theme.colors.textSecondary, outline: 'none',
     transition: 'border-color 0.2s',
   }
 
@@ -180,7 +180,7 @@ const Registro = () => {
         <form onSubmit={handleSubmit}>
           {/* Nombre */}
           <div style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', fontSize: '12px', color: theme.colors.textSecondary, marginBottom: '6px', fontWeight: 500 }}>
+            <label style={{ display: 'block', fontSize: '12px', color: theme.colors.bgNav, marginBottom: '6px', fontWeight: 500 }}>
               Nombre
             </label>
             <input
@@ -195,7 +195,7 @@ const Registro = () => {
 
           {/* Email */}
           <div style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', fontSize: '12px', color: theme.colors.textSecondary, marginBottom: '6px', fontWeight: 500 }}>
+            <label style={{ display: 'block', fontSize: '12px', color: theme.colors.bgNav, marginBottom: '6px', fontWeight: 500 }}>
               Email
             </label>
             <input
@@ -210,7 +210,7 @@ const Registro = () => {
 
           {/* Contraseña */}
           <div style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', fontSize: '12px', color: theme.colors.textSecondary, marginBottom: '6px', fontWeight: 500 }}>
+            <label style={{ display: 'block', fontSize: '12px', color: theme.colors.bgNav, marginBottom: '6px', fontWeight: 500 }}>
               Contraseña
             </label>
             <div style={{ position: 'relative' }}>
@@ -231,7 +231,7 @@ const Registro = () => {
 
           {/* Confirmar contraseña */}
           <div style={{ marginBottom: '1.5rem' }}>
-            <label style={{ display: 'block', fontSize: '12px', color: theme.colors.textSecondary, marginBottom: '6px', fontWeight: 500 }}>
+            <label style={{ display: 'block', fontSize: '12px', color: theme.colors.bgNav, marginBottom: '6px', fontWeight: 500 }}>
               Confirmar contraseña
             </label>
             <div style={{ position: 'relative' }}>
@@ -273,7 +273,7 @@ const Registro = () => {
           color: theme.colors.textMuted, marginTop: '1.25rem',
         }}>
           ¿Ya tienes cuenta?{' '}
-          <a href="/login" style={{ color: theme.colors.accent, textDecoration: 'none', fontWeight: 500 }}>
+          <a href="/login" style={{ color: theme.colors.bgNav, textDecoration: 'none', fontWeight: 500 }}>
             Inicia sesión
           </a>
         </p>
